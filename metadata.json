@@ -1,0 +1,6 @@
+{
+  "name": "PHÂN TÍCH WEB 360",
+  "description": "Đánh giá toàn diện website từ nội dung đến chuyển đổi",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

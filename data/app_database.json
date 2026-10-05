@@ -1,0 +1,164 @@
+{
+  "plans": [
+    {
+      "id": "plan_7d",
+      "name": "Gói 7 ngày",
+      "days": 7,
+      "price": 99000,
+      "description": "Trải nghiệm đầy đủ phân tích website 10X cho 1 chiến dịch",
+      "features": [
+        "Phân tích 360° toàn diện 8 bước",
+        "Định vị đối thủ & bản đồ radar D3",
+        "Bản kế hoạch hành động 3 giai đoạn",
+        "Xuất báo cáo TXT chuẩn UTF-8 & PDF"
+      ],
+      "is_active": true,
+      "is_featured": false
+    },
+    {
+      "id": "plan_30d",
+      "name": "Gói 30 ngày",
+      "days": 30,
+      "price": 199000,
+      "description": "Lựa chọn tối ưu cho chủ shop, doanh nghiệp & agency vừa và nhỏ",
+      "features": [
+        "Tất cả tính năng của gói 7 ngày",
+        "Không giới hạn số lần phân tích website",
+        "Ưu tiên tốc độ xử lý AI Gemini cao cấp",
+        "Chiến lược nội dung & kịch bản chốt sale 10X"
+      ],
+      "is_active": true,
+      "is_featured": true
+    },
+    {
+      "id": "plan_90d",
+      "name": "Gói 90 ngày",
+      "days": 90,
+      "price": 499000,
+      "description": "Tiết kiệm chi phí tối đa, đồng hành chiến lược chuyển đổi số quý",
+      "features": [
+        "Tất cả tính năng của gói 30 ngày",
+        "Tiết kiệm hơn 30% so với gia hạn từng tháng",
+        "Phân tích đối thủ sâu & phát hiện khoảng trống",
+        "Cập nhật tự động các tiêu chí chuẩn thương mại mới"
+      ],
+      "is_active": true,
+      "is_featured": false
+    }
+  ],
+  "orders": [
+    {
+      "order_id": "ord_1791109996405_0leuaa",
+      "order_code": "AFF000001",
+      "plan_id": "plan_30d",
+      "plan_name": "Gói 30 ngày",
+      "plan_days": 30,
+      "amount": 199000,
+      "customer_name": "Nguyen Van Test",
+      "customer_email": "test.customer@gmail.com",
+      "customer_phone": "0912345678",
+      "status": "paid",
+      "created_at": "2026-10-04T10:33:16.405Z",
+      "payment_content": "AFF000001",
+      "payment_method": "sepay",
+      "paid_at": "2026-10-04T10:33:16.410Z",
+      "expired_at": "2026-11-03T10:33:16.410Z"
+    }
+  ],
+  "payments": [
+    {
+      "order_code": "AFF000001",
+      "transaction_id": "99999",
+      "amount": 199000,
+      "content": "Chuyen tien AFF000001 mua goi 30 ngay",
+      "bank_brand_name": "MBBank",
+      "account_number": "0388888888",
+      "paid_at": "2026-10-04T10:33:16.410Z",
+      "payment_id": "pay_1791109996413_9upohg",
+      "created_at": "2026-10-04T10:33:16.413Z"
+    }
+  ],
+  "subscriptions": [
+    {
+      "subscription_id": "sub_1791109996413_v7a826",
+      "customer_email": "test.customer@gmail.com",
+      "customer_name": "Nguyen Van Test",
+      "customer_phone": "0912345678",
+      "subscription_type": "paid",
+      "plan_name": "Gói 30 ngày",
+      "order_code": "AFF000001",
+      "started_at": "2026-10-04T10:33:16.410Z",
+      "expired_at": "2026-11-03T10:33:16.410Z",
+      "is_active": true,
+      "created_at": "2026-10-04T10:33:16.413Z"
+    },
+    {
+      "subscription_id": "sub_trial_1791109996429",
+      "customer_email": "trial.user@gmail.com",
+      "customer_name": "Trial User",
+      "customer_phone": "0987654321",
+      "subscription_type": "trial",
+      "plan_name": "Dùng thử (24 giờ)",
+      "started_at": "2026-10-04T10:33:16.429Z",
+      "expired_at": "2026-10-05T10:33:16.429Z",
+      "is_active": true,
+      "created_at": "2026-10-04T10:33:16.429Z"
+    }
+  ],
+  "sepay_settings": {
+    "bank_name": "MBBank (Ngân hàng Quân Đội)",
+    "bank_code": "MB",
+    "account_number": "0388888888",
+    "account_name": "CONG TY TNHH PHAN TICH WEB 360",
+    "api_key": "",
+    "webhook_secret": "",
+    "order_prefix": "AFF",
+    "transfer_content_template": "{ORDER_CODE}",
+    "is_active": true,
+    "updated_at": "2026-10-04T10:33:06.541Z"
+  },
+  "trial_settings": {
+    "is_active": true,
+    "trial_hours": 24,
+    "button_title": "Dùng thử miễn phí",
+    "description": "Trải nghiệm đầy đủ tính năng PHÂN TÍCH WEB 360 trong 24 giờ hoàn toàn miễn phí",
+    "max_trials_per_email": 1,
+    "max_trials_per_phone": 1,
+    "max_trials_per_device": 1,
+    "updated_at": "2026-10-04T10:33:06.542Z"
+  },
+  "trial_logs": [
+    {
+      "trial_id": "trial_1791109996429_s20shb",
+      "customer_name": "Trial User",
+      "customer_email": "trial.user@gmail.com",
+      "customer_phone": "0987654321",
+      "device_id": "test_device_1",
+      "ip_address": "127.0.0.1",
+      "started_at": "2026-10-04T10:33:16.429Z",
+      "expired_at": "2026-10-05T10:33:16.429Z",
+      "status": "active",
+      "created_at": "2026-10-04T10:33:16.429Z"
+    }
+  ],
+  "webhook_logs": [
+    {
+      "content": "Chuyen tien AFF000001 mua goi 30 ngay",
+      "amount": 199000,
+      "detected_order_code": "AFF000001",
+      "result": "success",
+      "message": "Thanh toán thành công! Đã kích hoạt gói \"Gói 30 ngày\" đến 3/11/2026",
+      "raw_payload": {
+        "id": 99999,
+        "gateway": "MBBank",
+        "transactionDate": "2026-10-04T10:33:16.410Z",
+        "accountNumber": "0388888888",
+        "content": "Chuyen tien AFF000001 mua goi 30 ngay",
+        "transferType": "in",
+        "transferAmount": 199000
+      },
+      "log_id": "whl_1791109996421_mci3yv",
+      "received_at": "2026-10-04T10:33:16.421Z"
+    }
+  ]
+}
