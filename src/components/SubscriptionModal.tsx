@@ -626,11 +626,11 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     <span className="text-[10px] text-slate-400">Mở app ngân hàng bất kỳ để quét</span>
                   </div>
 
-                  <div className="p-2 bg-white rounded-xl shadow-xs border border-slate-200 dark:border-slate-600">
+                  <div className="payment-qr-frame p-2 bg-white rounded-xl shadow-xs border border-slate-200 dark:border-slate-600">
                     <img
                       src={bankInfo.qr_url}
                       alt="VietQR SePay Payment"
-                      className="w-48 h-48 sm:w-52 sm:h-52 object-contain rounded-lg"
+                      className="payment-qr-image w-48 h-48 sm:w-52 sm:h-52 object-contain rounded-lg"
                     />
                   </div>
 

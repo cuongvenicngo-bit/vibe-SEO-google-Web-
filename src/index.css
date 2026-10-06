@@ -2,20 +2,398 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+:root {
+  color-scheme: light;
+  --app-bg: #f8fafc;
+  --app-surface: #ffffff;
+  --app-surface-alt: #f1f5f9;
+  --app-text: #0f172a;
+  --app-text-muted: #475569;
+  --app-border: #cbd5e1;
+  --app-border-strong: #94a3b8;
+  --app-primary: #0f766e;
+  --app-primary-fill: #0f766e;
+  --app-primary-hover: #115e59;
+  --app-primary-soft: #ccfbf1;
+  --app-accent: #be185d;
+  --app-accent-hover: #9d174d;
+  --app-accent-soft: #fce7f3;
+  --app-success: #15803d;
+  --app-warning: #b45309;
+  --app-danger: #be123c;
+  --app-info: #0369a1;
+  --app-focus: rgba(15, 118, 110, 0.28);
+  --app-shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 24px rgba(15, 23, 42, 0.045);
+  --app-shadow-md: 0 16px 44px rgba(15, 23, 42, 0.12);
+
+  /* Tailwind utilities inherit the shared product palette. */
+  --color-blue-50: #f0fdfa;
+  --color-blue-100: #ccfbf1;
+  --color-blue-200: #99f6e4;
+  --color-blue-300: #5eead4;
+  --color-blue-400: #2dd4bf;
+  --color-blue-500: #14b8a6;
+  --color-blue-600: var(--app-primary-fill);
+  --color-blue-700: var(--app-primary-hover);
+  --color-blue-800: #134e4a;
+  --color-blue-900: #134e4a;
+  --color-blue-950: #042f2e;
+  --color-indigo-50: #f0fdfa;
+  --color-indigo-100: #ccfbf1;
+  --color-indigo-200: #99f6e4;
+  --color-indigo-300: #5eead4;
+  --color-indigo-400: #2dd4bf;
+  --color-indigo-500: #14b8a6;
+  --color-indigo-600: var(--app-primary-fill);
+  --color-indigo-700: var(--app-primary-hover);
+  --color-indigo-800: #134e4a;
+  --color-indigo-900: #134e4a;
+  --color-indigo-950: #042f2e;
+  --color-slate-500: var(--app-text-muted);
+  --color-slate-950: #0b1220;
+  --color-emerald-600: var(--app-success);
+  --color-amber-600: var(--app-warning);
+  --color-rose-600: var(--app-danger);
+  --color-sky-700: var(--app-info);
+}
+
+.dark {
+  color-scheme: dark;
+  --app-bg: #0b1220;
+  --app-surface: #162033;
+  --app-surface-alt: #1e293b;
+  --app-text: #f1f5f9;
+  --app-text-muted: #cbd5e1;
+  --app-border: #334155;
+  --app-border-strong: #475569;
+  --app-primary: #5eead4;
+  --app-primary-fill: #0f766e;
+  --app-primary-hover: #115e59;
+  --app-primary-soft: #134e4a;
+  --app-accent: #f9a8d4;
+  --app-accent-hover: #f472b6;
+  --app-accent-soft: #831843;
+  --app-success: #4ade80;
+  --app-warning: #fbbf24;
+  --app-danger: #fb7185;
+  --app-info: #38bdf8;
+  --app-focus: rgba(94, 234, 212, 0.34);
+  --app-shadow-sm: 0 1px 2px rgba(2, 6, 23, 0.34), 0 12px 28px rgba(2, 6, 23, 0.18);
+  --app-shadow-md: 0 20px 54px rgba(2, 6, 23, 0.46);
+  --color-blue-300: #99f6e4;
+  --color-blue-400: var(--app-primary);
+  --color-indigo-300: #99f6e4;
+  --color-indigo-400: var(--app-primary);
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #cbd5e1;
+  --color-slate-950: var(--app-bg);
+  --color-emerald-400: var(--app-success);
+  --color-amber-400: var(--app-warning);
+  --color-rose-400: var(--app-danger);
+  --color-sky-400: var(--app-info);
+}
+
 @layer base {
-  body {
-    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  html {
+    min-height: 100%;
+    background: var(--app-bg);
   }
-  
-  code, pre {
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--app-bg);
+    color: var(--app-text);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code,
+  pre {
     font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select,
+  [tabindex] {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :where(button, a, input, textarea, select, [tabindex]):focus-visible {
+    outline: 3px solid var(--app-focus);
+    outline-offset: 2px;
+  }
+
+  :where(input, textarea, select) {
+    caret-color: var(--app-primary);
+  }
+
+  :where(input, textarea, select)::placeholder {
+    color: var(--app-text-muted);
+    opacity: 0.72;
+  }
+
+  :where(button, input, textarea, select):disabled {
+    cursor: not-allowed !important;
+    filter: saturate(0.55);
+    opacity: 0.58 !important;
+  }
+
+  ::selection {
+    color: var(--app-text);
+    background: color-mix(in srgb, var(--app-accent) 28%, transparent);
+  }
+}
+
+.app-shell {
+  position: relative;
+  isolation: isolate;
+  background: var(--app-bg) !important;
+  color: var(--app-text) !important;
+}
+
+.app-shell > header,
+.app-shell > main {
+  position: relative;
+}
+
+.app-shell > main {
+  z-index: 1;
+}
+
+.app-shell > header {
+  border-color: color-mix(in srgb, var(--app-border) 76%, transparent) !important;
+  background: color-mix(in srgb, var(--app-surface) 88%, transparent) !important;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03), 0 10px 30px rgba(15, 23, 42, 0.035);
+}
+
+.brand-mark {
+  background-image: linear-gradient(135deg, var(--app-primary-fill), var(--app-accent)) !important;
+  box-shadow: 0 10px 26px color-mix(in srgb, var(--app-primary) 24%, transparent) !important;
+}
+
+.app-shell main h2 span.bg-gradient-to-r {
+  background-image: linear-gradient(90deg, var(--app-primary), var(--app-accent)) !important;
+}
+
+/* Surfaces stay crisp without changing their dimensions or placement. */
+.app-shell [class~="bg-white"] {
+  background-color: var(--app-surface);
+}
+
+.dark [class*="dark:bg-slate-950"] {
+  background-color: var(--app-bg) !important;
+}
+
+.dark [class*="dark:bg-slate-900"] {
+  background-color: var(--app-surface) !important;
+}
+
+.dark [class*="dark:bg-slate-850"],
+.dark [class*="dark:bg-slate-800"] {
+  background-color: var(--app-surface-alt) !important;
+}
+
+.dark [class*="dark:text-white"],
+.dark [class*="dark:text-slate-100"] {
+  color: var(--app-text) !important;
+}
+
+.dark [class*="dark:text-slate-400"],
+.dark [class*="dark:text-slate-300"] {
+  color: var(--app-text-muted) !important;
+}
+
+.dark [class*="dark:border-slate-800"],
+.dark [class*="dark:border-slate-700"],
+.dark [class*="dark:border-slate-600"] {
+  border-color: var(--app-border) !important;
+}
+
+.app-shell [class*="rounded-2xl"][class*="border"],
+.app-shell [class*="rounded-xl"][class*="border"] {
+  box-shadow: var(--app-shadow-sm);
+}
+
+/* Filled controls use accessible teal; secondary controls retain quiet surfaces. */
+.app-shell :where(button, a)[class~="bg-blue-600"],
+.app-shell :where(button, a)[class~="bg-indigo-600"] {
+  background-color: var(--app-primary-fill) !important;
+  border-color: var(--app-primary-fill) !important;
+}
+
+.app-shell :where(button, a)[class~="bg-blue-600"]:hover,
+.app-shell :where(button, a)[class~="bg-indigo-600"]:hover {
+  background-color: var(--app-primary-hover) !important;
+}
+
+.app-shell :where(button, a)[class~="text-blue-600"],
+.app-shell :where(button, a)[class~="text-indigo-600"] {
+  color: var(--app-primary) !important;
+}
+
+.app-shell :where(input, textarea, select) {
+  border-color: var(--app-border);
+  background-color: var(--app-surface);
+  color: var(--app-text);
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.025);
+}
+
+.app-shell :where(input, textarea, select):hover:not(:disabled) {
+  border-color: var(--app-border-strong);
+}
+
+.app-shell :where(input, textarea, select):focus {
+  border-color: var(--app-primary) !important;
+  box-shadow: 0 0 0 3px var(--app-focus) !important;
+}
+
+/* Data tables: strong headings, restrained striping and a clear hover state. */
+.app-shell table {
+  color: var(--app-text);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.app-shell thead {
+  background-color: var(--app-surface-alt) !important;
+  color: var(--app-text) !important;
+}
+
+.app-shell tbody tr:nth-child(even) {
+  background-color: color-mix(in srgb, var(--app-surface-alt) 58%, transparent);
+}
+
+.app-shell tbody tr:hover {
+  background-color: color-mix(in srgb, var(--app-primary) 9%, var(--app-surface)) !important;
+}
+
+.app-shell :where(th, td) {
+  border-color: var(--app-border) !important;
+}
+
+/* Popups and chart tooltips follow the same surface system. */
+.app-shell [class*="fixed"][class*="inset-0"] > [class*="rounded-2xl"],
+.app-shell [role="dialog"] {
+  border-color: var(--app-border) !important;
+  background-color: var(--app-surface) !important;
+  color: var(--app-text) !important;
+  box-shadow: var(--app-shadow-md) !important;
+}
+
+.app-shell [role="tooltip"],
+.app-shell .recharts-default-tooltip {
+  border: 1px solid var(--app-border) !important;
+  border-radius: 0.75rem !important;
+  background: var(--app-surface) !important;
+  color: var(--app-text) !important;
+  box-shadow: var(--app-shadow-md) !important;
+}
+
+.app-shell .recharts-cartesian-grid line,
+.app-shell .recharts-polar-grid-concentric-polygon,
+.app-shell .recharts-polar-grid-angle line {
+  stroke: var(--app-border);
+}
+
+.app-shell .recharts-text {
+  fill: var(--app-text-muted);
+}
+
+/* The payment QR is deliberately isolated from every visual effect. */
+.payment-qr-frame {
+  background: #ffffff !important;
+  isolation: isolate;
+}
+
+.payment-qr-image,
+img[alt="VietQR SePay Payment"] {
+  background: #ffffff !important;
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Decorative dark-mode sakura layer. It never participates in interaction. */
+.sakura-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  display: none;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+
+.dark .sakura-petals {
+  display: block;
+}
+
+.sakura-petal {
+  position: absolute;
+  top: -8vh;
+  left: var(--petal-x);
+  width: var(--petal-size);
+  height: var(--petal-height);
+  border-radius: 78% 22% 68% 32% / 72% 32% 68% 28%;
+  background: linear-gradient(135deg, rgba(253, 164, 211, 0.9), rgba(249, 168, 212, 0.48));
+  box-shadow: 0 0 10px rgba(249, 168, 212, 0.12);
+  opacity: 0;
+  transform: rotate(var(--petal-rotate));
+  animation: sakura-fall var(--petal-duration) linear var(--petal-delay) infinite;
+  will-change: transform, opacity;
+}
+
+.sakura-petal::after {
+  position: absolute;
+  inset: 16% 44% 12% auto;
+  width: 1px;
+  content: '';
+  background: rgba(190, 24, 93, 0.24);
+  transform: rotate(38deg);
+  transform-origin: bottom;
+}
+
+.sakura-petals[data-paused="true"] .sakura-petal {
+  animation-play-state: paused;
+}
+
+@keyframes sakura-fall {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -8vh, 0) rotate(var(--petal-rotate));
+  }
+  10% {
+    opacity: 0.56;
+  }
+  48% {
+    transform: translate3d(var(--petal-drift), 48vh, 0) rotate(calc(var(--petal-rotate) + 190deg));
+  }
+  88% {
+    opacity: 0.46;
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--petal-drift-end), 108vh, 0) rotate(calc(var(--petal-rotate) + 420deg));
   }
 }
 
 /* Custom subtle scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
 }
 
 ::-webkit-scrollbar-track {
@@ -23,10 +401,35 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.4);
   border-radius: 9999px;
+  background: color-mix(in srgb, var(--app-text-muted) 42%, transparent);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(100, 116, 139, 0.6);
+  background: color-mix(in srgb, var(--app-primary) 68%, transparent);
+}
+
+@media (max-width: 640px) {
+  .sakura-petal:nth-child(n + 7) {
+    display: none;
+  }
+
+  .sakura-petal {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sakura-petals {
+    display: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

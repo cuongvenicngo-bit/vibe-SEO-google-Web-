@@ -21,6 +21,7 @@ import { Step7ImplementationRoadmap } from './components/steps/Step7Implementati
 import { Step8ExportAndActions } from './components/steps/Step8ExportAndActions';
 import { ToastNotification } from './components/ToastNotification';
 import { ErrorBoundary } from './components/ErrorBoundary';
+import { DarkSakuraPetals } from './components/DarkSakuraPetals';
 import { Globe, ShieldCheck, Sparkles, CheckCircle2, TrendingUp, Layers, Rocket } from 'lucide-react';
 
 export default function App() {
@@ -316,7 +317,8 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+      <div className="app-shell min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+        <DarkSakuraPetals />
         {/* Application Header */}
         <AppHeader
           theme={theme}
