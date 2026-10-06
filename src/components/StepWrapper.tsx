@@ -73,7 +73,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
     >
       {/* Step Header */}
       <div
-        className="pl-6 pr-4 py-4 sm:pl-7 sm:pr-6 flex items-start sm:items-center justify-between gap-3 cursor-pointer select-none border-b border-slate-100/80 dark:border-slate-800/60"
+        className="step-header pl-6 pr-4 py-4 sm:pl-7 sm:pr-6 flex items-start sm:items-center justify-between gap-3 cursor-pointer select-none"
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-start sm:items-center gap-3.5 min-w-0">
@@ -110,7 +110,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
 
       {/* Step Body */}
       {isExpanded && (
-        <div className="pl-5 pr-3 py-5 sm:pl-7 sm:pr-6 sm:py-6 animate-in">
+        <div className="step-body pl-5 pr-3 py-5 sm:pl-7 sm:pr-6 sm:py-6 animate-in">
           {children}
         </div>
       )}

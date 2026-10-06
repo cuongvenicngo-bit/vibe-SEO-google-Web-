@@ -38,7 +38,10 @@
   --color-accent-800: #9a3412;
   --color-accent-900: #7c2d12;
 
-  /* Tailwind has no 750/850 steps; the components use them for dark-mode layering. */
+  /* Tailwind has no 150/650/750/850 steps but the components use them; without these the
+     classes fall back to the text color (e.g. near-black table row dividers). */
+  --color-slate-150: #e8edf5;
+  --color-slate-650: #3e4c63;
   --color-slate-750: #283548;
   --color-slate-850: #172033;
 
@@ -48,13 +51,33 @@
 
 :root {
   color-scheme: light;
-  --app-bg: #f8fafc;
+  /* Layering, back to front: page -> card -> step body -> inner cards (white). */
+  --app-bg: #edf1f8;
+  --app-glow: rgba(37, 99, 235, 0.1);
+  --card-bg: #ffffff;
+  --card-border: #dbe3ef;
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px -14px rgba(30, 64, 175, 0.18);
+  --step-body-bg: #f6f8fc;
+  --step-header-from: #eaf1ff;
+  --step-header-border: #e1e8f5;
+  --table-head-bg: #eaf1ff;
+  --table-head-text: #1e3a8a;
   --focus-ring: rgba(37, 99, 235, 0.4);
 }
 
 .dark {
   color-scheme: dark;
-  --app-bg: #0b1120;
+  --app-bg: #070c18;
+  --app-glow: rgba(37, 99, 235, 0.16);
+  --card-bg: #0f172a;
+  --card-border: #1e293b;
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
+  /* Darker than the card so inner cards (slate-850) stand forward. */
+  --step-body-bg: #0b1222;
+  --step-header-from: rgba(37, 99, 235, 0.18);
+  --step-header-border: #1e293b;
+  --table-head-bg: #15213b;
+  --table-head-text: #bfdbfe;
   --focus-ring: rgba(96, 165, 250, 0.5);
 }
 
@@ -68,7 +91,9 @@
   body {
     min-height: 100vh;
     margin: 0;
-    background: var(--app-bg);
+    background-color: var(--app-bg);
+    background-image: radial-gradient(80rem 36rem at 50% -8rem, var(--app-glow), transparent 70%);
+    background-repeat: no-repeat;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -131,15 +156,19 @@
 @layer components {
   /* Neutral card surface (the "60%"). In the components layer so utilities can override it. */
   .surface-card {
-    background-color: #ffffff;
-    border: 1px solid var(--color-slate-200);
-    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 16px -8px rgba(15, 23, 42, 0.08);
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
   }
 
-  .dark .surface-card {
-    background-color: var(--color-slate-900);
-    border-color: var(--color-slate-800);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  /* Step header: a soft blue wash so each step is easy to spot while scrolling. */
+  .step-header {
+    background-image: linear-gradient(90deg, var(--step-header-from), transparent 75%);
+    border-bottom: 1px solid var(--step-header-border);
+  }
+
+  .step-body {
+    background-color: var(--step-body-bg);
   }
 
   /* Scrollable tables keep readable columns on phones instead of squeezing text into tall rows. */
@@ -149,12 +178,12 @@
 }
 
 .app-header {
-  background: color-mix(in srgb, var(--app-bg) 85%, transparent);
-  border-color: var(--color-slate-200);
+  background: rgba(255, 255, 255, 0.88);
+  border-color: var(--card-border);
 }
 
 .dark .app-header {
-  border-color: var(--color-slate-800);
+  background: rgba(7, 12, 24, 0.82);
 }
 
 /* Hero: the one deep-blue band on the page (part of the 30% brand share) with a faint grid. */
@@ -192,7 +221,16 @@
   background: var(--color-brand-500);
 }
 
-/* Data tables: restrained striping and a clear hover state. */
+/* Data tables: tinted header row, restrained striping and a clear hover state. */
+.app-shell thead,
+.app-shell thead tr {
+  background-color: var(--table-head-bg);
+}
+
+.app-shell thead th {
+  color: var(--table-head-text);
+}
+
 .app-shell tbody tr:nth-child(even) {
   background-color: color-mix(in srgb, var(--color-slate-100) 55%, transparent);
 }
@@ -235,6 +273,15 @@ img[alt='VietQR SePay Payment'] {
 
 .hero-float.delay-2 {
   animation-delay: -4.6s;
+}
+
+/* Horizontal pill rows scroll by swipe/trackpad without showing a scrollbar. */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
 /* Custom subtle scrollbar */

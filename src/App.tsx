@@ -447,6 +447,51 @@ export default function App() {
           </section>
         )}
 
+        {/* Report band: keeps the brand blue at the top once a report exists */}
+        {report && (
+          <section className="hero-band relative overflow-hidden text-white">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-5 sm:pt-8">
+              <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-2">
+                <div className="min-w-0">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-brand-200">Báo cáo phân tích website</p>
+                  <h2 className="mt-1 text-xl sm:text-3xl font-black tracking-tight truncate">{report.businessName}</h2>
+                  <a
+                    href={report.userWebsiteUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-1 text-sm text-brand-100/90 hover:text-white"
+                  >
+                    <Globe className="w-4 h-4" />
+                    {report.userWebsiteUrl}
+                  </a>
+                </div>
+                {report.analyzedAt && (
+                  <p className="text-xs text-brand-100/80">
+                    Phân tích lúc {new Date(report.analyzedAt).toLocaleString('vi-VN')}
+                  </p>
+                )}
+              </div>
+              <nav aria-label="Các bước phân tích" className="no-scrollbar mt-5 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto">
+                <ol className="flex gap-2 min-w-max pb-1">
+                  {Object.entries(STEP_ICONS).map(([num, Icon]) => (
+                    <li key={num}>
+                      <a
+                        href={`#buoc-${num}`}
+                        className="inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-white bg-white/10 ring-1 ring-white/20 hover:bg-white/20 transition-colors"
+                      >
+                        <span className="w-6 h-6 rounded-full bg-white text-brand-700 flex items-center justify-center">
+                          <Icon className="w-3.5 h-3.5" />
+                        </span>
+                        {STEP_NAV_LABELS[Number(num)]}
+                      </a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </div>
+          </section>
+        )}
+
         {/* Main Content Container */}
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Key numbers, overlapping the hero band */}
@@ -471,24 +516,26 @@ export default function App() {
             </section>
           )}
 
-          {/* Quick navigation across the 8 steps */}
-          <nav aria-label="Các bước phân tích" className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto">
-            <ol className="flex gap-2 min-w-max pb-1">
-              {Object.entries(STEP_ICONS).map(([num, Icon]) => (
-                <li key={num}>
-                  <a
-                    href={`#buoc-${num}`}
-                    className="surface-card inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-brand-300 hover:text-brand-700 dark:hover:text-brand-300 transition-colors"
-                  >
-                    <span className="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center">
-                      <Icon className="w-3.5 h-3.5" />
-                    </span>
-                    {STEP_NAV_LABELS[Number(num)]}
-                  </a>
-                </li>
-              ))}
-            </ol>
-          </nav>
+          {/* Quick navigation across the 8 steps (moves into the report band once a report exists) */}
+          {!report && (
+            <nav aria-label="Các bước phân tích" className="no-scrollbar mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto">
+              <ol className="flex gap-2 min-w-max pb-1">
+                {Object.entries(STEP_ICONS).map(([num, Icon]) => (
+                  <li key={num}>
+                    <a
+                      href={`#buoc-${num}`}
+                      className="surface-card inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-brand-300 hover:text-brand-700 dark:hover:text-brand-300 transition-colors"
+                    >
+                      <span className="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center">
+                        <Icon className="w-3.5 h-3.5" />
+                      </span>
+                      {STEP_NAV_LABELS[Number(num)]}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          )}
 
           {/* 8 Steps Vertical Workflow */}
           <div>
