@@ -43,11 +43,11 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
   return (
     <div className="space-y-6">
       {/* Action Buttons Box */}
-      <div className="p-6 rounded-2xl bg-gradient-to-br from-indigo-50/90 via-white to-sky-50/90 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-5">
+      <div className="p-6 rounded-2xl bg-gradient-to-br from-brand-50/90 via-white to-sky-50/90 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
-              <FileText className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+              <FileText className="w-5 h-5 text-brand-600 dark:text-brand-400" />
               Sao chép & Xuất báo cáo chuyên nghiệp (10X Agency Edition)
             </h3>
             <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -62,7 +62,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
               onClick={handlePrint}
               className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs text-slate-800 dark:text-white bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-750 transition-all cursor-pointer shadow-xs"
             >
-              <Printer className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+              <Printer className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               <span>In báo cáo / Lưu PDF</span>
             </button>
 
@@ -70,7 +70,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
             <button
               type="button"
               onClick={handleDownload}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-sm shadow-indigo-600/20 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 shadow-sm shadow-brand-600/20 transition-all cursor-pointer"
             >
               <FileText className="w-4 h-4" />
               <span>Tải file TXT (UTF-8)</span>
@@ -141,7 +141,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
                     <td className="py-2.5 px-3 text-slate-700 dark:text-slate-300">
                       {evt.meaning}
                     </td>
-                    <td className="py-2.5 px-3 text-indigo-600 dark:text-indigo-400 font-mono text-[11px]">
+                    <td className="py-2.5 px-3 text-brand-600 dark:text-brand-400 font-mono text-[11px]">
                       {evt.verificationMethod}
                     </td>
                     <td className="py-2.5 pl-3 text-slate-500 dark:text-slate-400">
@@ -159,7 +159,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
       {report.auditedUrls && report.auditedUrls.length > 0 && (
         <div className="p-5 rounded-2xl bg-white dark:bg-slate-850 border border-slate-200/90 dark:border-slate-800 space-y-3 shadow-xs">
           <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Compass className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+            <Compass className="w-4 h-4 text-brand-600 dark:text-brand-400" />
             Danh mục các trang đã quét mẫu & Phương pháp đọc (Audited Pages)
           </h4>
           <div className="overflow-x-auto">
@@ -186,7 +186,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
                         href={item.url.startsWith('http') ? item.url : `https://${item.url}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="text-indigo-600 dark:text-indigo-400 hover:underline font-mono text-[11px] truncate max-w-xs block"
+                        className="text-brand-600 dark:text-brand-400 hover:underline font-mono text-[11px] truncate max-w-xs block"
                       >
                         {item.url}
                       </a>
@@ -216,7 +216,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
 
         {/* Note on insufficient data */}
         <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-300 flex items-start gap-2.5">
-          <Info className="w-4 h-4 text-indigo-500 shrink-0 mt-0.5" />
+          <Info className="w-4 h-4 text-brand-500 shrink-0 mt-0.5" />
           <div className="space-y-1">
             <p>
               <strong>Cam kết không tự tạo số liệu:</strong> Mọi đánh giá được kiểm chứng trên các trang công khai. Các chỉ số về lượng tìm kiếm được chú thích <em>"Cần nhập dữ liệu từ công cụ từ khóa"</em> và ô giá được ghi <em>"Cần điền giá thật"</em>.
@@ -242,7 +242,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
                 href={sourceUrl.startsWith('http') ? sourceUrl : `https://${sourceUrl}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1 shrink-0 text-[11px] ml-2"
+                className="text-brand-600 dark:text-brand-400 hover:underline inline-flex items-center gap-1 shrink-0 text-[11px] ml-2"
               >
                 Mở liên kết
                 <ExternalLink className="w-3 h-3" />

@@ -76,7 +76,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
         <div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <TrendingUp className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+            <TrendingUp className="w-4 h-4 text-brand-600 dark:text-brand-400" />
             Khoảng trống cơ hội đột phá (10X Opportunity Gaps - {opportunities.length} mục)
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -88,7 +88,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
           type="button"
           onClick={onRegenerate}
           disabled={isRegenerating}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 rounded-lg border border-indigo-200 dark:border-indigo-800 transition-colors cursor-pointer shrink-0"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 rounded-lg border border-brand-200 dark:border-brand-800 transition-colors cursor-pointer shrink-0"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isRegenerating ? 'animate-spin' : ''}`} />
           <span>Tạo lại cơ hội</span>
@@ -136,8 +136,8 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
           onClick={() => setFilterType('new')}
           className={`px-3 py-1 rounded-lg font-medium transition-colors cursor-pointer ${
             filterType === 'new'
-              ? 'bg-indigo-600 text-white'
-              : 'bg-indigo-50 dark:bg-indigo-950/50 text-indigo-700 dark:text-indigo-300 hover:bg-indigo-100'
+              ? 'bg-brand-600 text-white'
+              : 'bg-brand-50 dark:bg-brand-950/50 text-brand-700 dark:text-brand-300 hover:bg-brand-100'
           }`}
         >
           Chưa thấy trên các mẫu đã đọc
@@ -166,7 +166,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
                         ? 'bg-rose-100 dark:bg-rose-950/70 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-900'
                         : isImprove
                         ? 'bg-amber-100 dark:bg-amber-950/70 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-900'
-                        : 'bg-indigo-100 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200 dark:border-indigo-900'
+                        : 'bg-brand-100 dark:bg-brand-950/70 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-900'
                     }`}
                   >
                     {opp.badge || (isUrgent ? 'CẦN HOÀN THIỆN' : isImprove ? 'CƠ HỘI CẢI THIỆN' : 'CHƯA THẤY ĐỐI THỦ')}
@@ -188,7 +188,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
                     <span className="text-slate-800 dark:text-slate-200">{opp.description || opp.observedIssue}</span>
                   </div>
                   <div>
-                    <strong className="text-indigo-600 dark:text-indigo-400 font-semibold">Vì sao là cơ hội: </strong>
+                    <strong className="text-brand-600 dark:text-brand-400 font-semibold">Vì sao là cơ hội: </strong>
                     <span className="text-slate-700 dark:text-slate-300">{opp.whyOpportunity || opp.whyCare}</span>
                   </div>
                   <div className="p-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200/80 dark:border-slate-700">
@@ -202,7 +202,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
                 {/* Funnel & Timeline */}
                 <div className="flex flex-wrap items-center gap-3 pt-2 text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-100 dark:border-slate-800">
                   <span className="flex items-center gap-1 font-medium text-slate-700 dark:text-slate-300">
-                    <Target className="w-3.5 h-3.5 text-indigo-500" />
+                    <Target className="w-3.5 h-3.5 text-brand-500" />
                     {opp.funnelStage || 'Toàn trang'}
                   </span>
                   <span className="flex items-center gap-1">
@@ -226,7 +226,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     isAdded
                       ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 cursor-default'
-                      : 'bg-indigo-600 hover:bg-indigo-700 text-white shadow-xs'
+                      : 'bg-brand-600 hover:bg-brand-700 text-white shadow-xs'
                   }`}
                 >
                   {isAdded ? (

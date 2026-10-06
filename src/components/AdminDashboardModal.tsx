@@ -20,6 +20,7 @@ import {
   Search,
   ExternalLink,
   Zap,
+  AlertTriangle,
 } from 'lucide-react';
 import {
   Plan,
@@ -74,6 +75,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
   const [subscribers, setSubscribers] = useState<Subscription[]>([]);
   const [trialLogs, setTrialLogs] = useState<TrialLog[]>([]);
   const [webhookUrl, setWebhookUrl] = useState<string>('');
+  const [storageMode, setStorageMode] = useState<string>('');
 
   const [isLoadingData, setIsLoadingData] = useState<boolean>(false);
   const [isSaving, setIsSaving] = useState<boolean>(false);
@@ -146,6 +148,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
       setSubscribers(data.active_subscriptions || []);
       setTrialLogs(data.trial_logs || []);
       setWebhookUrl(data.webhook_url);
+      setStorageMode(data.storage_mode || '');
     } catch (err: any) {
       onShowToast(err.message || 'Không thể tải dữ liệu admin', 'error');
     } finally {
@@ -278,7 +281,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
         {/* Passcode Login Screen if not authenticated */}
         {!isAuthenticated ? (
           <div className="p-6 sm:p-10 max-w-md mx-auto w-full my-auto space-y-5 text-center">
-            <div className="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-950/80 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto shadow-md">
+            <div className="w-14 h-14 rounded-2xl bg-ocean-100 dark:bg-ocean-950/80 text-ocean-600 dark:text-ocean-400 flex items-center justify-center mx-auto shadow-md">
               <Lock className="w-7 h-7" />
             </div>
 
@@ -304,7 +307,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                   placeholder="Mật khẩu quản trị viên"
                   value={passcode}
                   onChange={(e) => setPasscode(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs outline-hidden focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-xs outline-hidden focus:ring-2 focus:ring-ocean-500"
                   autoFocus
                 />
                 {authError && (
@@ -323,7 +326,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer disabled:opacity-50"
+                  className="flex-1 py-2.5 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer disabled:opacity-50"
                 >
                   {isVerifying ? 'Đang xác thực...' : 'Đăng nhập'}
                 </button>
@@ -334,9 +337,9 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           /* Authenticated Dashboard */
           <>
             {/* Header */}
-            <div className="p-4 sm:p-5 bg-gradient-to-r from-slate-900 via-blue-950 to-indigo-950 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+            <div className="p-4 sm:p-5 bg-gradient-to-r from-slate-900 via-ocean-950 to-brand-950 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-600/30 border border-blue-500/40 flex items-center justify-center text-blue-400">
+                <div className="w-10 h-10 rounded-xl bg-ocean-600/30 border border-ocean-500/40 flex items-center justify-center text-ocean-400">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <div>
@@ -368,6 +371,16 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
               </div>
             </div>
 
+            {storageMode === 'temporary' && (
+              <div className="flex items-start gap-2 px-4 py-2.5 bg-amber-50 dark:bg-amber-950/50 border-b border-amber-200 dark:border-amber-800 text-xs text-amber-800 dark:text-amber-200 shrink-0">
+                <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+                <span>
+                  Dữ liệu đang lưu tạm trên máy chủ Vercel và có thể mất khi máy chủ khởi động lại (đơn hàng, cài đặt SePay, gói cước).
+                  Để lưu vĩnh viễn: vào Vercel → Storage → thêm <strong>Upstash Redis</strong> (miễn phí) và kết nối với dự án này, rồi deploy lại.
+                </span>
+              </div>
+            )}
+
             {/* Navigation Tabs Bar */}
             <div className="flex items-center gap-1 px-4 py-2 bg-slate-100 dark:bg-slate-850 border-b border-slate-200 dark:border-slate-800 overflow-x-auto text-xs shrink-0 select-none">
               <button
@@ -375,7 +388,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('plans')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'plans'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -388,7 +401,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('sepay')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'sepay'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -401,7 +414,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('trial')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'trial'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -414,7 +427,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('orders')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'orders'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -427,7 +440,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('webhooks')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'webhooks'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -440,7 +453,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('subscribers')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'subscribers'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -453,7 +466,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 onClick={() => setActiveTab('trial_users')}
                 className={`px-3 py-1.5 rounded-lg font-bold flex items-center gap-1.5 transition-colors cursor-pointer shrink-0 ${
                   activeTab === 'trial_users'
-                    ? 'bg-blue-600 text-white shadow-xs'
+                    ? 'bg-ocean-600 text-white shadow-xs'
                     : 'text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800'
                 }`}
               >
@@ -500,7 +513,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         type="button"
                         onClick={handleSavePlans}
                         disabled={isSaving}
-                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold cursor-pointer shadow-xs disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-ocean-600 hover:bg-ocean-700 text-white font-bold cursor-pointer shadow-xs disabled:opacity-50"
                       >
                         <Save className="w-3.5 h-3.5" />
                         <span>{isSaving ? 'Đang lưu...' : 'Lưu danh sách gói'}</span>
@@ -515,7 +528,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 space-y-3 shadow-2xs"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-bold text-xs text-blue-600 dark:text-blue-400">
+                          <span className="font-bold text-xs text-ocean-600 dark:text-ocean-400">
                             Gói #{idx + 1}
                           </span>
                           <button
@@ -572,7 +585,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                                 updated[idx].price = Number(e.target.value);
                                 setPlans(updated);
                               }}
-                              className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono font-bold text-blue-600"
+                              className="w-full px-2.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 font-mono font-bold text-ocean-600"
                             />
                           </div>
                         </div>
@@ -603,7 +616,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                                 updated[idx].is_active = e.target.checked;
                                 setPlans(updated);
                               }}
-                              className="rounded text-blue-600 cursor-pointer"
+                              className="rounded text-ocean-600 cursor-pointer"
                             />
                             <span>Bật gói</span>
                           </label>
@@ -644,7 +657,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       type="button"
                       onClick={handleSaveSePaySettings}
                       disabled={isSaving}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold cursor-pointer shadow-xs"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-ocean-600 hover:bg-ocean-700 text-white font-bold cursor-pointer shadow-xs"
                     >
                       <Save className="w-3.5 h-3.5" />
                       <span>{isSaving ? 'Đang lưu...' : 'Lưu cấu hình SePay'}</span>
@@ -660,13 +673,13 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       <button
                         type="button"
                         onClick={copyWebhookUrl}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-blue-600 hover:bg-blue-700 text-white font-bold text-[10px] cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-[10px] cursor-pointer"
                       >
                         {hasCopiedWebhook ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                         <span>Sao chép URL</span>
                       </button>
                     </div>
-                    <div className="p-2 rounded-lg bg-white dark:bg-slate-900 font-mono text-[11px] text-blue-600 dark:text-blue-400 select-all border border-slate-200 dark:border-slate-800 break-all">
+                    <div className="p-2 rounded-lg bg-white dark:bg-slate-900 font-mono text-[11px] text-ocean-600 dark:text-ocean-400 select-all border border-slate-200 dark:border-slate-800 break-all">
                       {webhookUrl}
                     </div>
                     <p className="text-[10px] text-slate-500">
@@ -802,7 +815,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                             onChange={(e) =>
                               setSepaySettings({ ...sepaySettings, is_active: e.target.checked })
                             }
-                            className="w-4 h-4 rounded text-blue-600 cursor-pointer"
+                            className="w-4 h-4 rounded text-ocean-600 cursor-pointer"
                           />
                           <span>Bật thanh toán tự động SePay</span>
                         </label>
@@ -822,9 +835,9 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         type="button"
                         onClick={handleTestSePay}
                         disabled={isTestingSePay}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 hover:bg-blue-100 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 font-bold cursor-pointer"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ocean-50 dark:bg-ocean-950/60 hover:bg-ocean-100 text-ocean-700 dark:text-ocean-300 border border-ocean-200 dark:border-ocean-800 font-bold cursor-pointer"
                       >
-                        <Zap className="w-3.5 h-3.5 text-blue-600" />
+                        <Zap className="w-3.5 h-3.5 text-ocean-600" />
                         <span>{isTestingSePay ? 'Đang test...' : 'Test kết nối SePay'}</span>
                       </button>
 
@@ -904,7 +917,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       type="button"
                       onClick={handleSaveTrialSettings}
                       disabled={isSaving}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold cursor-pointer shadow-xs"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-ocean-600 hover:bg-ocean-700 text-white font-bold cursor-pointer shadow-xs"
                     >
                       <Save className="w-3.5 h-3.5" />
                       <span>{isSaving ? 'Đang lưu...' : 'Lưu cấu hình'}</span>
@@ -919,7 +932,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         onChange={(e) =>
                           setTrialSettings({ ...trialSettings, is_active: e.target.checked })
                         }
-                        className="w-4 h-4 rounded text-blue-600 cursor-pointer"
+                        className="w-4 h-4 rounded text-ocean-600 cursor-pointer"
                       />
                       <span>Bật tính năng dùng thử miễn phí</span>
                     </label>
@@ -1040,7 +1053,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         ) : (
                           filteredOrders.map((o) => (
                             <tr key={o.order_id} className="hover:bg-slate-50 dark:hover:bg-slate-850">
-                              <td className="p-2.5 font-mono font-bold text-blue-600">
+                              <td className="p-2.5 font-mono font-bold text-ocean-600">
                                 {o.order_code}
                               </td>
                               <td className="p-2.5 font-medium">{o.customer_name}</td>
@@ -1049,7 +1062,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                                 <div className="text-slate-400">{o.customer_phone}</div>
                               </td>
                               <td className="p-2.5">{o.plan_name}</td>
-                              <td className="p-2.5 font-mono font-bold text-blue-600">
+                              <td className="p-2.5 font-mono font-bold text-ocean-600">
                                 {formatPrice(o.amount)}
                               </td>
                               <td className="p-2.5">
@@ -1138,7 +1151,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                               <td className="p-2.5 font-medium max-w-[200px] truncate" title={log.content}>
                                 {log.content}
                               </td>
-                              <td className="p-2.5 font-mono font-bold text-blue-600">
+                              <td className="p-2.5 font-mono font-bold text-ocean-600">
                                 {formatPrice(log.amount)}
                               </td>
                               <td className="p-2.5 font-mono font-bold">
@@ -1222,12 +1235,12 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                                       Trả phí
                                     </span>
                                   ) : (
-                                    <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-medium text-[10px]">
+                                    <span className="px-2 py-0.5 rounded-full bg-ocean-100 text-ocean-800 font-medium text-[10px]">
                                       Dùng thử
                                     </span>
                                   )}
                                 </td>
-                                <td className="p-2.5 font-semibold text-blue-600">{s.plan_name}</td>
+                                <td className="p-2.5 font-semibold text-ocean-600">{s.plan_name}</td>
                                 <td className="p-2.5 text-slate-500">
                                   {new Date(s.started_at).toLocaleDateString('vi-VN')}
                                 </td>
@@ -1268,7 +1281,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         onClick={() => setTrialFilter('all')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer ${
                           trialFilter === 'all'
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-ocean-600 text-white'
                             : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                         }`}
                       >
@@ -1279,7 +1292,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         onClick={() => setTrialFilter('active')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer ${
                           trialFilter === 'active'
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-ocean-600 text-white'
                             : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                         }`}
                       >
@@ -1290,7 +1303,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         onClick={() => setTrialFilter('expired')}
                         className={`px-2.5 py-1 rounded-lg text-xs font-semibold cursor-pointer ${
                           trialFilter === 'expired'
-                            ? 'bg-blue-600 text-white'
+                            ? 'bg-ocean-600 text-white'
                             : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300'
                         }`}
                       >

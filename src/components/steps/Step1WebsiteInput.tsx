@@ -115,10 +115,10 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
   return (
     <div className="space-y-6">
       {/* 1-Click Demo Presets for Instant 10X Test */}
-      <div className="p-3.5 bg-gradient-to-r from-indigo-50/80 via-sky-50/60 to-purple-50/60 dark:from-indigo-950/50 dark:via-sky-950/30 dark:to-purple-950/40 rounded-2xl border border-indigo-100 dark:border-indigo-900/60 text-xs shadow-xs">
+      <div className="p-3.5 bg-gradient-to-r from-brand-50/80 via-sky-50/60 to-purple-50/60 dark:from-brand-950/50 dark:via-sky-950/30 dark:to-purple-950/40 rounded-2xl border border-brand-100 dark:border-brand-900/60 text-xs shadow-xs">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
           <div className="flex items-center gap-2">
-            <span className="w-6 h-6 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
+            <span className="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center font-bold text-xs shadow-xs">
               ★
             </span>
             <span className="font-bold text-slate-800 dark:text-slate-200">
@@ -141,7 +141,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                   ],
                 });
               }}
-              className="px-3 py-1.5 bg-white dark:bg-slate-800 hover:bg-indigo-50 dark:hover:bg-slate-700 border border-indigo-200 dark:border-indigo-800 rounded-lg font-semibold text-indigo-700 dark:text-indigo-300 cursor-pointer shadow-xs transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 bg-white dark:bg-slate-800 hover:bg-brand-50 dark:hover:bg-slate-700 border border-brand-200 dark:border-brand-800 rounded-lg font-semibold text-brand-700 dark:text-brand-300 cursor-pointer shadow-xs transition-colors flex items-center gap-1.5"
             >
               <span>⚖️ Cân Điện Tử Gia Phát (Benchmark 10X Thực Tế)</span>
             </button>
@@ -200,7 +200,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
               className={`w-full pl-11 pr-4 py-3 rounded-xl border text-sm transition-all outline-hidden ${
                 urlError
                   ? 'border-rose-400 bg-rose-50/30 text-rose-900 dark:text-rose-200 dark:border-rose-800'
-                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20'
+                  : 'border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-slate-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20'
               } disabled:opacity-60 disabled:cursor-not-allowed`}
             />
           </div>
@@ -229,7 +229,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
               placeholder="Ví dụ: Thiết kế nội thất căn hộ..."
               value={inputData.productService || ''}
               onChange={(e) => onChangeInput({ ...inputData, productService: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-hidden"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-hidden"
             />
           </div>
 
@@ -244,7 +244,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
               placeholder="Ví dụ: TP.HCM, Hà Nội, Toàn quốc..."
               value={inputData.location || ''}
               onChange={(e) => onChangeInput({ ...inputData, location: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-hidden"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-hidden"
             />
           </div>
 
@@ -259,7 +259,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
               placeholder="Ví dụ: thi công nội thất trọn gói..."
               value={inputData.mainKeyword || ''}
               onChange={(e) => onChangeInput({ ...inputData, mainKeyword: e.target.value })}
-              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 outline-hidden"
+              className="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/80 text-xs sm:text-sm text-slate-900 dark:text-white focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20 outline-hidden"
             />
           </div>
         </div>
@@ -269,7 +269,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
           <button
             type="button"
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="inline-flex items-center gap-1.5 text-xs font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 transition-colors cursor-pointer"
           >
             {showAdvanced ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             <span>Tùy chọn nâng cao: Thêm URL đối thủ thủ công & Dán nội dung trang</span>
@@ -295,7 +295,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                         handleAddManualCompetitor();
                       }
                     }}
-                    className="flex-1 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:border-indigo-500 outline-hidden"
+                    className="flex-1 px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:border-brand-500 outline-hidden"
                   />
                   <button
                     type="button"
@@ -340,7 +340,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                   placeholder="Dán tiêu đề, nội dung trang chủ, danh sách sản phẩm hoặc thông điệp của bạn tại đây..."
                   value={inputData.pastedContent || ''}
                   onChange={(e) => onChangeInput({ ...inputData, pastedContent: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:border-indigo-500 outline-hidden resize-y"
+                  className="w-full px-3 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:border-brand-500 outline-hidden resize-y"
                 />
               </div>
             </div>
@@ -366,7 +366,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                 <button
                   type="button"
                   onClick={onOpenSubscriptionModal}
-                  className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-lg bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
                 >
                   <CreditCard className="w-3.5 h-3.5" />
                   <span>{subscriptionStatus?.is_expired ? 'Gia hạn gói' : 'Mua gói'}</span>
@@ -378,7 +378,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                   onClick={onOpenTrialModal}
                   className="px-4 py-2 rounded-lg bg-white dark:bg-slate-800 hover:bg-slate-50 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-slate-700 font-bold text-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-blue-600" />
+                  <Sparkles className="w-3.5 h-3.5 text-ocean-600" />
                   <span>Dùng thử miễn phí 24h</span>
                 </button>
               )}
@@ -392,7 +392,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
             <button
               type="button"
               onClick={onOpenSubscriptionModal}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 shadow-md inline-flex items-center justify-center gap-2 cursor-pointer transition-all"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-ocean-600 to-brand-600 hover:from-ocean-700 hover:to-brand-700 shadow-md inline-flex items-center justify-center gap-2 cursor-pointer transition-all"
             >
               <Lock className="w-4 h-4" />
               <span>
@@ -405,7 +405,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
             <button
               type="submit"
               disabled={isLoading || !inputData.url.trim()}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 shadow-md shadow-indigo-600/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 shadow-md shadow-brand-600/20 disabled:opacity-50 disabled:cursor-not-allowed transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>
@@ -425,9 +425,9 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
 
       {/* Loading Progress Stepper */}
       {isLoading && (
-        <div className="p-5 rounded-2xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/80 dark:border-indigo-900 animate-in fade-in duration-200">
-          <div className="flex items-center gap-2.5 mb-3 text-indigo-950 dark:text-indigo-200 font-bold text-sm">
-            <Loader2 className="w-4 h-4 animate-spin text-indigo-600 dark:text-indigo-400" />
+        <div className="p-5 rounded-2xl bg-brand-50/70 dark:bg-brand-950/30 border border-brand-200/80 dark:border-brand-900 animate-in fade-in duration-200">
+          <div className="flex items-center gap-2.5 mb-3 text-brand-950 dark:text-brand-200 font-bold text-sm">
+            <Loader2 className="w-4 h-4 animate-spin text-brand-600 dark:text-brand-400" />
             <span>AI đang xử lý dữ liệu...</span>
           </div>
 
@@ -442,7 +442,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                     isPast
                       ? 'bg-emerald-100/70 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800/60'
                       : isCurrent
-                      ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs border border-indigo-300 dark:border-indigo-700 font-semibold'
+                      ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs border border-brand-300 dark:border-brand-700 font-semibold'
                       : 'bg-slate-100/60 dark:bg-slate-850/60 text-slate-400 dark:text-slate-500'
                   }`}
                 >
@@ -451,7 +451,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                       isPast
                         ? 'bg-emerald-600 text-white'
                         : isCurrent
-                        ? 'bg-indigo-600 text-white animate-pulse'
+                        ? 'bg-brand-600 text-white animate-pulse'
                         : 'bg-slate-300 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
                     }`}
                   >

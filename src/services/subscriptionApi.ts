@@ -203,6 +203,7 @@ export async function getAdminDataApi(passcode: string): Promise<{
   active_subscriptions: Subscription[];
   trial_logs: TrialLog[];
   webhook_url: string;
+  storage_mode?: 'shared' | 'temporary' | 'local-file';
 }> {
   const res = await fetch('/api/admin/dashboard-data', {
     headers: getAdminHeaders(passcode),

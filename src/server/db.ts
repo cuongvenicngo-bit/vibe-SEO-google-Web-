@@ -12,8 +12,27 @@ import {
   CustomerSubscriptionStatus,
 } from '../types/subscription';
 
-const DATA_DIR = path.resolve(process.cwd(), 'data');
+// Vercel functions can only write to /tmp, and that copy is lost whenever the instance is recycled.
+const DATA_DIR = process.env.VERCEL ? '/tmp/web360-data' : path.resolve(process.cwd(), 'data');
 const DB_FILE = path.resolve(DATA_DIR, 'app_database.json');
+
+// Optional shared store (Upstash Redis REST, e.g. added from the Vercel Marketplace) so that
+// orders, subscriptions and admin settings survive across serverless instances.
+const REMOTE_URL = process.env.KV_REST_API_URL || process.env.UPSTASH_REDIS_REST_URL || '';
+const REMOTE_TOKEN = process.env.KV_REST_API_TOKEN || process.env.UPSTASH_REDIS_REST_TOKEN || '';
+const REMOTE_KEY = 'web360:app_database';
+const hasRemoteStore = () => !!(REMOTE_URL && REMOTE_TOKEN);
+let pendingRemoteSave: Promise<void> | null = null;
+
+async function redisCommand(command: string[]): Promise<any> {
+  const res = await fetch(REMOTE_URL, {
+    method: 'POST',
+    headers: { Authorization: `Bearer ${REMOTE_TOKEN}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(command),
+  });
+  if (!res.ok) throw new Error(`Redis ${command[0]} failed with HTTP ${res.status}`);
+  return (await res.json()).result;
+}
 
 interface DatabaseSchema {
   plans: Plan[];
@@ -156,6 +175,45 @@ function saveDatabase() {
   } catch (err) {
     console.error('Failed to save database file:', err);
   }
+  if (hasRemoteStore()) {
+    const snapshot = JSON.stringify(dbMemory);
+    pendingRemoteSave = redisCommand(['SET', REMOTE_KEY, snapshot]).then(() => undefined);
+  }
+}
+
+/** Reloads the in-memory database from the shared store (no-op without one). */
+export async function hydrateDatabase(): Promise<void> {
+  if (!hasRemoteStore()) return;
+  const stored = await redisCommand(['GET', REMOTE_KEY]);
+  if (typeof stored !== 'string') {
+    // First run against an empty store: publish the current (default) data.
+    loadDatabase();
+    saveDatabase();
+    return;
+  }
+  const parsed = JSON.parse(stored);
+  dbMemory = {
+    plans: parsed.plans || DEFAULT_PLANS,
+    orders: parsed.orders || [],
+    payments: parsed.payments || [],
+    subscriptions: parsed.subscriptions || [],
+    sepay_settings: { ...DEFAULT_SEPAY_SETTINGS, ...(parsed.sepay_settings || {}) },
+    trial_settings: { ...DEFAULT_TRIAL_SETTINGS, ...(parsed.trial_settings || {}) },
+    trial_logs: parsed.trial_logs || [],
+    webhook_logs: parsed.webhook_logs || [],
+  };
+}
+
+/** Waits until the latest change has been written to the shared store. */
+export async function flushDatabase(): Promise<void> {
+  const pending = pendingRemoteSave;
+  pendingRemoteSave = null;
+  if (pending) await pending;
+}
+
+export function getStorageMode(): 'shared' | 'temporary' | 'local-file' {
+  if (hasRemoteStore()) return 'shared';
+  return process.env.VERCEL ? 'temporary' : 'local-file';
 }
 
 // ----------------- PLANS -----------------

@@ -22,7 +22,22 @@ import { Step8ExportAndActions } from './components/steps/Step8ExportAndActions'
 import { ToastNotification } from './components/ToastNotification';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { DarkSakuraPetals } from './components/DarkSakuraPetals';
-import { Globe, ShieldCheck, Sparkles, CheckCircle2, TrendingUp, Layers, Rocket } from 'lucide-react';
+import { AmbientBackground } from './components/AmbientBackground';
+import { HeroIllustration } from './components/HeroIllustration';
+import { StepEmptyState } from './components/StepEmptyState';
+import { STEP_THEMES, stepStyle } from './components/stepThemes';
+import { Sparkles, CheckCircle2, TrendingUp, Layers, Rocket } from 'lucide-react';
+
+const STEP_NAV_LABELS: Record<number, string> = {
+  1: 'Nhập website',
+  2: 'Đối thủ',
+  3: 'Ma trận tiêu chí',
+  4: 'Cơ hội 10X',
+  5: 'Nội dung & SEO',
+  6: 'Sản xuất media',
+  7: 'Lộ trình 90 ngày',
+  8: 'Xuất báo cáo',
+};
 
 export default function App() {
   // Theme state
@@ -317,7 +332,8 @@ export default function App() {
 
   return (
     <ErrorBoundary>
-      <div className="app-shell min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 transition-colors">
+      <div className="app-shell min-h-screen flex flex-col text-slate-900 dark:text-slate-100 transition-colors">
+        <AmbientBackground />
         <DarkSakuraPetals />
         {/* Application Header */}
         <AppHeader
@@ -337,63 +353,109 @@ export default function App() {
         />
 
         {/* Main Content Container */}
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Hero Banner when no report exists */}
           {!report && !isLoading && (
-            <div className="mb-10 text-center max-w-4xl mx-auto py-8 animate-in fade-in duration-300 space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-indigo-50 dark:bg-indigo-950/70 text-indigo-700 dark:text-indigo-300 border border-indigo-200/80 dark:border-indigo-800/80">
-                <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
-                Phiên bản thương mại 10X Toàn Cầu · Báo cáo chuẩn xác thực dữ liệu
-              </div>
-
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-tight">
-                Đánh giá toàn diện website <br />
-                <span className="bg-gradient-to-r from-indigo-600 via-sky-600 to-emerald-600 bg-clip-text text-transparent">
-                  từ nội dung đến chuyển đổi 10X
-                </span>
-              </h2>
-
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-                Nền tảng kiểm định website chuyên nghiệp: Tự động phân tích ngành nghề, tìm 5 đối thủ tự nhiên, so sánh ma trận 35 tiêu chí, khai phá 10X cơ hội thị trường và xây dựng lộ trình 90 ngày.
-              </p>
-
-              {/* 3 Key Highlights Badges */}
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 max-w-2xl mx-auto text-xs text-left">
-                <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-emerald-100 dark:bg-emerald-950/80 text-emerald-600 flex items-center justify-center shrink-0">
-                    <CheckCircle2 className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <strong className="block text-slate-900 dark:text-white">Không bịa đặt số liệu</strong>
-                    <span className="text-slate-500">Quan sát thực tế & đối chiếu công khai</span>
-                  </div>
+            <section className="mb-8 sm:mb-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-6 lg:gap-10 items-center animate-in">
+              <div className="text-center lg:text-left space-y-5">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold glass-panel text-brand-700 dark:text-brand-200">
+                  <span className="relative flex w-2 h-2">
+                    <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
+                    <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
+                  </span>
+                  Phiên bản thương mại 10X · Báo cáo chuẩn xác thực dữ liệu
                 </div>
 
-                <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 flex items-center justify-center shrink-0">
-                    <TrendingUp className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <strong className="block text-slate-900 dark:text-white">Tìm 5 đối thủ tự nhiên</strong>
-                    <span className="text-slate-500">Lọc bỏ mạng xã hội & sàn TMĐT</span>
-                  </div>
-                </div>
+                <h2 className="text-[2rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem] font-black tracking-tight text-slate-900 dark:text-white">
+                  Đánh giá toàn diện website{' '}
+                  <span className="text-aurora">từ nội dung đến chuyển đổi 10X</span>
+                </h2>
 
-                <div className="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex items-center gap-2.5">
-                  <div className="w-8 h-8 rounded-lg bg-sky-100 dark:bg-sky-950/80 text-sky-600 flex items-center justify-center shrink-0">
+                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  AI tự động phân tích ngành nghề, tìm 5 đối thủ tự nhiên, so sánh ma trận 35 tiêu chí, khai phá cơ hội thị trường và xây dựng lộ trình 90 ngày cho website của bạn.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                  <a
+                    href="#buoc-1"
+                    className="bg-aurora inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold text-white shadow-xl shadow-brand-500/30 hover:brightness-110 hover:-translate-y-0.5 transition-all"
+                  >
                     <Rocket className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <strong className="block text-slate-900 dark:text-white">Lộ trình 90 ngày 10X</strong>
-                    <span className="text-slate-500">Kịch bản video, banner & biểu mẫu</span>
-                  </div>
+                    Bắt đầu phân tích ngay
+                  </a>
+                  <button
+                    type="button"
+                    onClick={() => setIsSubscriptionModalOpen(true)}
+                    className="glass-panel inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold text-slate-800 dark:text-white hover:-translate-y-0.5 transition-all cursor-pointer"
+                  >
+                    <Sparkles className="w-4 h-4 text-brand-500" />
+                    Xem bảng giá
+                  </button>
                 </div>
+
+                {/* Key numbers */}
+                <dl className="grid grid-cols-4 gap-2 sm:gap-3 max-w-xl mx-auto lg:mx-0">
+                  {[
+                    { value: '8', label: 'bước', color: 'text-ocean-600 dark:text-ocean-300' },
+                    { value: '35', label: 'tiêu chí', color: 'text-brand-600 dark:text-brand-300' },
+                    { value: '5', label: 'đối thủ', color: 'text-pink-600 dark:text-pink-300' },
+                    { value: '90', label: 'ngày', color: 'text-amber-600 dark:text-amber-300' },
+                  ].map((stat) => (
+                    <div key={stat.label} className="glass-panel rounded-2xl py-3 px-1 text-center">
+                      <dt className="sr-only">{stat.label}</dt>
+                      <dd className={`text-xl sm:text-2xl font-black ${stat.color}`}>{stat.value}</dd>
+                      <dd className="text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-400">{stat.label}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
-            </div>
+
+              <div className="relative max-w-md sm:max-w-lg w-full mx-auto">
+                <HeroIllustration className="w-full h-auto" />
+              </div>
+
+              {/* 3 Key Highlights */}
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-left">
+                {[
+                  { icon: CheckCircle2, title: 'Không bịa đặt số liệu', desc: 'Quan sát thực tế & đối chiếu công khai', tint: 'from-emerald-400 to-teal-500' },
+                  { icon: TrendingUp, title: 'Tìm 5 đối thủ tự nhiên', desc: 'Lọc bỏ mạng xã hội & sàn TMĐT', tint: 'from-ocean-400 to-brand-500' },
+                  { icon: Layers, title: 'Lộ trình 90 ngày 10X', desc: 'Kịch bản video, banner & biểu mẫu', tint: 'from-amber-400 to-pink-500' },
+                ].map(({ icon: Icon, title, desc, tint }) => (
+                  <div key={title} className="glass-panel p-4 rounded-2xl flex items-center gap-3 hover:-translate-y-0.5 transition-transform">
+                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${tint} text-white flex items-center justify-center shrink-0 shadow-lg`}>
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <strong className="block text-slate-900 dark:text-white">{title}</strong>
+                      <span className="text-xs text-slate-500 dark:text-slate-400">{desc}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
 
+          {/* Quick navigation across the 8 steps */}
+          <nav aria-label="Các bước phân tích" className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto">
+            <ol className="flex gap-2 min-w-max pb-1">
+              {Object.entries(STEP_THEMES).map(([num, { icon: Icon }]) => (
+                <li key={num} style={stepStyle(Number(num))}>
+                  <a
+                    href={`#buoc-${num}`}
+                    className="glass-panel inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:-translate-y-0.5 transition-transform"
+                  >
+                    <span className="step-badge w-6 h-6 rounded-full text-white flex items-center justify-center">
+                      <Icon className="w-3.5 h-3.5" />
+                    </span>
+                    {STEP_NAV_LABELS[Number(num)]}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
           {/* 8 Steps Vertical Workflow */}
-          <div className="space-y-4">
+          <div>
             {/* BƯỚC 1: Nhập website và tìm đối thủ */}
             <StepWrapper
               stepNumber={1}
@@ -434,9 +496,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Vui lòng nhập website ở Bước 1 và bấm "Phân tích website" để AI xây dựng hồ sơ đối thủ.
-                </div>
+                <StepEmptyState stepNumber={2} message="Vui lòng nhập website ở Bước 1 và bấm “Phân tích website” để AI xây dựng hồ sơ đối thủ." />
               )}
             </StepWrapper>
 
@@ -458,9 +518,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Bảng ma trận tiêu chí sẽ xuất hiện sau khi AI quét và xác thực dữ liệu các website.
-                </div>
+                <StepEmptyState stepNumber={3} message="Bảng ma trận tiêu chí sẽ xuất hiện sau khi AI quét và xác thực dữ liệu các website." />
               )}
             </StepWrapper>
 
@@ -481,9 +539,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Khoảng trống cơ hội sẽ được tự động tổng hợp sau khi hoàn tất so sánh tiêu chí.
-                </div>
+                <StepEmptyState stepNumber={4} message="Khoảng trống cơ hội sẽ được tự động tổng hợp sau khi hoàn tất so sánh tiêu chí." />
               )}
             </StepWrapper>
 
@@ -504,9 +560,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Chiến lược nội dung và On-page SEO sẽ hiển thị tại đây sau khi phân tích.
-                </div>
+                <StepEmptyState stepNumber={5} message="Chiến lược nội dung và On-page SEO sẽ hiển thị tại đây sau khi phân tích." />
               )}
             </StepWrapper>
 
@@ -527,9 +581,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Kế hoạch sản xuất bàn giao cho đội ngũ thực thi sẽ hiển thị sau khi hoàn tất phân tích.
-                </div>
+                <StepEmptyState stepNumber={6} message="Kế hoạch sản xuất bàn giao cho đội ngũ thực thi sẽ hiển thị sau khi hoàn tất phân tích." />
               )}
             </StepWrapper>
 
@@ -549,9 +601,7 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Lộ trình triển khai 3 giai đoạn sẽ xuất hiện sau khi phân tích hoàn tất.
-                </div>
+                <StepEmptyState stepNumber={7} message="Lộ trình triển khai 3 giai đoạn sẽ xuất hiện sau khi phân tích hoàn tất." />
               )}
             </StepWrapper>
 
@@ -571,13 +621,15 @@ export default function App() {
                   onShowToast={showToast}
                 />
               ) : (
-                <div className="py-8 text-center text-xs text-slate-400">
-                  Báo cáo tổng kết và tính năng xuất file TXT/PDF sẽ khả dụng sau khi hoàn thành các bước trên.
-                </div>
+                <StepEmptyState stepNumber={8} message="Báo cáo tổng kết và tính năng xuất file TXT/PDF sẽ khả dụng sau khi hoàn thành các bước trên." />
               )}
             </StepWrapper>
           </div>
         </main>
+
+        <footer className="relative z-[1] border-t border-slate-200/70 dark:border-slate-800/70 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
+          <span className="font-bold text-aurora">PHÂN TÍCH WEB 360</span> · Đánh giá website từ nội dung đến chuyển đổi · Thanh toán tự động SePay
+        </footer>
 
         {/* Gemini API Key Configuration Modal */}
         <ApiKeyModal

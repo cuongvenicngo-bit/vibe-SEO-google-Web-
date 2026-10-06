@@ -53,7 +53,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-800">
         <div>
           <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-            <Camera className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+            <Camera className="w-4 h-4 text-brand-600 dark:text-brand-400" />
             Kế hoạch sản xuất Design, Media & Biểu mẫu chuyển đổi (10X Studio)
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -65,7 +65,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           type="button"
           onClick={handleRegenerateWhole}
           disabled={isRegenerating}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 rounded-lg border border-indigo-200 dark:border-indigo-800 transition-colors cursor-pointer shrink-0"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 rounded-lg border border-brand-200 dark:border-brand-800 transition-colors cursor-pointer shrink-0"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${isRegenerating ? 'animate-spin' : ''}`} />
           <span>Tạo lại kế hoạch</span>
@@ -79,7 +79,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('banners')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'banners'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -92,7 +92,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('photos')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'photos'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -105,7 +105,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('videos')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'videos'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -118,7 +118,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('pricing')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'pricing'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -131,7 +131,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('buttons')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'buttons'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -144,7 +144,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('forms')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'forms'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -157,7 +157,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           onClick={() => setActiveTab('credibility')}
           className={`flex items-center gap-1.5 px-3 py-2 rounded-lg transition-all cursor-pointer ${
             activeTab === 'credibility'
-              ? 'bg-white dark:bg-slate-800 text-indigo-600 dark:text-indigo-400 shadow-xs font-bold'
+              ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs font-bold'
               : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
           }`}
         >
@@ -176,7 +176,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
             >
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">
                     Banner #{idx + 1} · {b.position}
                   </span>
                   <CopyButton
@@ -186,8 +186,8 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
                 </div>
 
                 {/* Banner Mockup Card Preview */}
-                <div className="p-4 rounded-xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white shadow-inner space-y-2">
-                  <span className="text-[10px] font-mono text-indigo-300 uppercase tracking-wider block">
+                <div className="p-4 rounded-xl bg-gradient-to-r from-slate-900 via-brand-950 to-slate-900 text-white shadow-inner space-y-2">
+                  <span className="text-[10px] font-mono text-brand-300 uppercase tracking-wider block">
                     [Mô phỏng hiển thị trên Website]
                   </span>
                   <h4 className="text-sm font-bold text-white leading-tight">
@@ -197,7 +197,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
                     {b.subtitle}
                   </p>
                   <div className="pt-2">
-                    <span className="inline-block px-3 py-1 bg-indigo-500 hover:bg-indigo-600 text-white rounded-md font-bold text-xs shadow-xs">
+                    <span className="inline-block px-3 py-1 bg-brand-500 hover:bg-brand-600 text-white rounded-md font-bold text-xs shadow-xs">
                       {b.buttonText} →
                     </span>
                   </div>
@@ -229,7 +229,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
               >
                 <div className="flex items-start justify-between gap-2">
                   <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <Camera className="w-4 h-4 text-indigo-600 dark:text-indigo-400 shrink-0" />
+                    <Camera className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0" />
                     Nhóm #{idx + 1}: {group.category || group.purpose}
                   </h4>
                   <CopyButton
@@ -282,7 +282,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
             >
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
                 <div>
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">
                     {v.videoNumber || `Video #${idx + 1}`} · {v.context || v.duration}
                   </span>
                   <h4 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
@@ -311,7 +311,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
                       key={sIdx}
                       className="p-3 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/60 dark:border-slate-750 flex flex-col sm:flex-row items-start gap-3"
                     >
-                      <span className="px-2.5 py-1 rounded bg-indigo-100 dark:bg-indigo-950/80 text-indigo-700 dark:text-indigo-300 font-mono font-bold text-xs shrink-0">
+                      <span className="px-2.5 py-1 rounded bg-brand-100 dark:bg-brand-950/80 text-brand-700 dark:text-brand-300 font-mono font-bold text-xs shrink-0">
                         {sc.timestamp}
                       </span>
                       <div className="flex-1 space-y-1">
@@ -348,7 +348,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
               >
                 <div className="space-y-3">
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                    <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">
                       Gói #{idx + 1}
                     </span>
                     <CopyButton
@@ -390,7 +390,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
 
                 <button
                   type="button"
-                  className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors shadow-xs cursor-pointer"
+                  className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 transition-colors shadow-xs cursor-pointer"
                 >
                   {pkg.ctaText || 'Nhận báo giá chi tiết'}
                 </button>
@@ -406,7 +406,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
           <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
             <div>
               <h4 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <PhoneCall className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                <PhoneCall className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                 Vị trí nút liên hệ dọc hành trình đọc trang (Scroll CTA Buttons)
               </h4>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -435,7 +435,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
                       {btn.customerMindset || 'Tìm hiểu thông tin'}
                     </td>
                     <td className="py-2.5 px-3">
-                      <span className="px-2.5 py-1 rounded bg-indigo-600 text-white font-semibold text-[11px]">
+                      <span className="px-2.5 py-1 rounded bg-brand-600 text-white font-semibold text-[11px]">
                         {btn.buttonText || btn.label}
                       </span>
                     </td>
@@ -460,7 +460,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
-                  <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider">
+                  <span className="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wider">
                     Biểu mẫu #{idx + 1}
                   </span>
                   <span className="text-[11px] text-slate-400">
@@ -490,7 +490,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
               <button
                 type="button"
                 onClick={() => onShowToast(`Mô phỏng kích hoạt: ${form.title || form.name}`)}
-                className="w-full py-2 rounded-lg text-xs font-semibold text-indigo-700 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950/60 hover:bg-indigo-100 cursor-pointer transition-colors"
+                className="w-full py-2 rounded-lg text-xs font-semibold text-brand-700 dark:text-brand-300 bg-brand-50 dark:bg-brand-950/60 hover:bg-brand-100 cursor-pointer transition-colors"
               >
                 Xem trước biểu mẫu
               </button>

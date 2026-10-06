@@ -51,7 +51,7 @@ Trạng thái: ${statusInfo.label}
         <div className="px-6 py-4 border-b border-slate-100 dark:border-slate-800 flex items-start justify-between gap-4 bg-slate-50/60 dark:bg-slate-850/60">
           <div>
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-400 border border-indigo-200 dark:border-indigo-800">
+              <span className="text-xs font-semibold px-2 py-0.5 rounded bg-brand-50 dark:bg-brand-950/60 text-brand-700 dark:text-brand-400 border border-brand-200 dark:border-brand-800">
                 Tiêu chí {criterionId} · {criterionGroup}
               </span>
               <span className={`text-xs font-semibold px-2 py-0.5 rounded ${statusInfo.badgeClass}`}>
@@ -96,7 +96,7 @@ Trạng thái: ${statusInfo.label}
                   href={evaluation.sourceUrl.startsWith('http') ? evaluation.sourceUrl : `https://${evaluation.sourceUrl}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-indigo-600 dark:text-indigo-400 hover:underline inline-flex items-center gap-1 truncate max-w-xs"
+                  className="text-brand-600 dark:text-brand-400 hover:underline inline-flex items-center gap-1 truncate max-w-xs"
                 >
                   {evaluation.sourceUrl}
                   <ExternalLink className="w-3 h-3 shrink-0" />
@@ -108,7 +108,7 @@ Trạng thái: ${statusInfo.label}
           {/* Lý do đánh giá */}
           <div>
             <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">
-              <Info className="w-4 h-4 text-indigo-500" />
+              <Info className="w-4 h-4 text-brand-500" />
               Lý do đánh giá & Phân tích
             </div>
             <p className="text-slate-700 dark:text-slate-300 leading-relaxed pl-6">
@@ -128,9 +128,9 @@ Trạng thái: ${statusInfo.label}
           </div>
 
           {/* Đề xuất cho website của người dùng */}
-          <div className="p-4 rounded-xl bg-indigo-50/70 dark:bg-indigo-950/30 border border-indigo-200/70 dark:border-indigo-850">
-            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-indigo-900 dark:text-indigo-300 mb-1.5">
-              <Sparkles className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+          <div className="p-4 rounded-xl bg-brand-50/70 dark:bg-brand-950/30 border border-brand-200/70 dark:border-brand-850">
+            <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-900 dark:text-brand-300 mb-1.5">
+              <Sparkles className="w-4 h-4 text-brand-600 dark:text-brand-400" />
               Đề xuất hành động cho Website của bạn
             </div>
             <p className="text-slate-800 dark:text-slate-200 leading-relaxed font-normal">

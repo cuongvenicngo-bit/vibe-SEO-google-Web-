@@ -1,5 +1,4 @@
 import express from 'express';
-import { createServer as createViteServer } from 'vite';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
@@ -27,6 +26,9 @@ import {
   getSubscriptions,
   getActiveSubscriptions,
   getTrialLogs,
+  hydrateDatabase,
+  flushDatabase,
+  getStorageMode,
 } from './src/server/db.ts';
 
 dotenv.config();
@@ -35,7 +37,27 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+// Behind Vercel's proxy: lets req.protocol report https (used for the SePay webhook URL).
+app.set('trust proxy', true);
 app.use(express.json({ limit: '20mb' }));
+
+// Serverless instances do not share memory or disk, so every API request reloads the
+// database from the shared store first and writes changes back before responding.
+app.use('/api', async (req, res, next) => {
+  try {
+    await hydrateDatabase();
+  } catch (err) {
+    console.error('Failed to load shared database:', err);
+  }
+  const sendJson = res.json.bind(res);
+  res.json = ((body: unknown) => {
+    flushDatabase()
+      .catch((err) => console.error('Failed to persist shared database:', err))
+      .finally(() => sendJson(body));
+    return res;
+  }) as typeof res.json;
+  next();
+});
 
 const PORT = 3000;
 
@@ -1484,6 +1506,7 @@ app.get('/api/admin/dashboard-data', requireAdmin, (req, res) => {
     active_subscriptions: getActiveSubscriptions(),
     trial_logs: getTrialLogs(),
     webhook_url: webhookUrl,
+    storage_mode: getStorageMode(),
   });
 });
 
@@ -1954,21 +1977,28 @@ Trả về JSON hợp lệ cho phân đoạn "${section}".
   }
 });
 
-// Setup Vite middleware in dev or static files in production
-const isProd = process.env.NODE_ENV === 'production';
-if (!isProd) {
-  const vite = await createViteServer({
-    server: { middlewareMode: true },
-    appType: 'spa',
-  });
-  app.use(vite.middlewares);
-} else {
-  app.use(express.static(path.resolve(__dirname, 'dist')));
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+// On Vercel this file is bundled into a serverless function (see scripts/build-vercel.mjs):
+// static files are served by Vercel's CDN and only /api/* reaches Express.
+export default app;
+
+if (!process.env.VERCEL) {
+  // Setup Vite middleware in dev or static files in production
+  const isProd = process.env.NODE_ENV === 'production';
+  if (!isProd) {
+    const { createServer: createViteServer } = await import('vite');
+    const vite = await createViteServer({
+      server: { middlewareMode: true },
+      appType: 'spa',
+    });
+    app.use(vite.middlewares);
+  } else {
+    app.use(express.static(path.resolve(__dirname, 'dist')));
+    app.get('*', (req, res) => {
+      res.sendFile(path.resolve(__dirname, 'dist/index.html'));
+    });
+  }
+
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Web 360 10X Server running on http://0.0.0.0:${PORT}`);
   });
 }
-
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Web 360 10X Server running on http://0.0.0.0:${PORT}`);
-});

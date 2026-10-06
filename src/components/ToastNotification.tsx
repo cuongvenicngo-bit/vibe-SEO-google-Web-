@@ -24,13 +24,13 @@ export const ToastNotification: React.FC<ToastNotificationProps> = ({ toasts, on
                 ? 'bg-slate-900/95 dark:bg-slate-100/95 text-white dark:text-slate-900 border-slate-700/50 dark:border-slate-300'
                 : isError
                 ? 'bg-rose-900/95 text-white border-rose-700'
-                : 'bg-indigo-900/95 text-white border-indigo-700'
+                : 'bg-brand-900/95 text-white border-brand-700'
             }`}
           >
             <div className="flex items-center gap-2.5">
               {isSuccess && <CheckCircle2 className="w-5 h-5 text-emerald-400 dark:text-emerald-600 shrink-0" />}
               {isError && <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />}
-              {!isSuccess && !isError && <Info className="w-5 h-5 text-indigo-400 shrink-0" />}
+              {!isSuccess && !isError && <Info className="w-5 h-5 text-brand-400 shrink-0" />}
               <span className="text-sm font-medium leading-snug">{toast.message}</span>
             </div>
             <button
