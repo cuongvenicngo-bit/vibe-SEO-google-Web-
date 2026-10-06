@@ -25,7 +25,7 @@ import { HeroIllustration } from './components/HeroIllustration';
 import { StepEmptyState } from './components/StepEmptyState';
 import { TemplateNotice } from './components/TemplateNotice';
 import { STEP_ICONS } from './components/stepThemes';
-import { Sparkles, CheckCircle2, TrendingUp, Layers, Rocket } from 'lucide-react';
+import { Sparkles, CheckCircle2, TrendingUp, Layers, Rocket, Globe } from 'lucide-react';
 
 const STEP_NAV_LABELS: Record<number, string> = {
   1: 'Nhập website',
@@ -218,15 +218,15 @@ export default function App() {
     showToast('Đã xóa sạch dữ liệu và đặt lại ứng dụng.');
   };
 
-  const handleStartAnalysis = async () => {
-    if (!inputData.url.trim()) return;
+  const runAnalysis = async (input: WebsiteInputForm) => {
+    if (!input.url.trim()) return;
 
     setIsLoading(true);
     setErrorMessage(null);
 
     try {
       showToast('Đang phân tích website mục tiêu và tìm kiếm đối thủ 10X...', 'info');
-      const result = await analyzeWebsiteApi(inputData);
+      const result = await analyzeWebsiteApi(input);
       setReport(result);
       showToast('Phân tích website 360 hoàn tất thành công!', 'success');
     } catch (err: any) {
@@ -236,6 +236,30 @@ export default function App() {
       showToast(msg, 'error');
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  // Called from buttons that pass click events, so it takes no arguments.
+  const handleStartAnalysis = () => runAnalysis(inputData);
+
+  // Hero URL bar: fill Step 1 and start right away, or ask for a trial/plan first.
+  const [heroUrl, setHeroUrl] = useState('');
+  const handleHeroSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const url = heroUrl.trim();
+    if (!url) {
+      document.getElementById('hero-url')?.focus();
+      return;
+    }
+    const next = { ...inputData, url };
+    setInputData(next);
+    document.getElementById('buoc-1')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (subscriptionStatus?.has_access) {
+      runAnalysis(next);
+    } else if (subscriptionStatus?.is_expired) {
+      setIsSubscriptionModalOpen(true);
+    } else {
+      setIsTrialModalOpen(true);
     }
   };
 
@@ -349,86 +373,101 @@ export default function App() {
           subscriptionStatus={subscriptionStatus}
         />
 
-        {/* Main Content Container */}
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
-          {/* Hero Banner when no report exists */}
-          {!report && !isLoading && (
-            <section className="mb-8 sm:mb-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-6 lg:gap-10 items-center animate-in">
-              <div className="text-center lg:text-left space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold surface-card text-slate-700 dark:text-slate-200">
-                  <span className="relative flex w-2 h-2">
-                    <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
-                    <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
-                  </span>
-                  Phiên bản thương mại 10X · Báo cáo chuẩn xác thực dữ liệu
-                </div>
+        {/* Hero band: shown until the first report exists */}
+        {!report && !isLoading && (
+          <section className="hero-band relative overflow-hidden text-white">
+            <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-24 sm:pt-14 sm:pb-28 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center animate-in">
+              <div className="text-center lg:text-left">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-white/10 ring-1 ring-white/20 text-brand-100">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                  Công cụ AI kiểm định website cho doanh nghiệp Việt
+                </span>
 
-                <h2 className="text-[2rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem] font-black tracking-tight text-slate-900 dark:text-white">
-                  Đánh giá toàn diện website{' '}
-                  <span className="text-brand-600 dark:text-brand-400">từ nội dung đến chuyển đổi 10X</span>
+                <h2 className="mt-5 text-[2.1rem] leading-[1.1] sm:text-5xl lg:text-[3.5rem] font-black tracking-tight">
+                  Biết ngay website của bạn{' '}
+                  <span className="text-brand-300">thua đối thủ ở đâu</span>
                 </h2>
 
-                <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  AI tự động phân tích ngành nghề, tìm 5 đối thủ tự nhiên, so sánh ma trận 35 tiêu chí, khai phá cơ hội thị trường và xây dựng lộ trình 90 ngày cho website của bạn.
+                <p className="mt-5 text-sm sm:text-lg text-brand-100/90 max-w-xl mx-auto lg:mx-0 leading-relaxed">
+                  Nhập địa chỉ website — AI tìm 5 đối thủ thật, chấm 35 tiêu chí từ nội dung đến chuyển đổi và lập lộ trình 90 ngày để bạn bán được nhiều hơn.
                 </p>
 
-                <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                  <a
-                    href="#buoc-1"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-accent-600 hover:bg-accent-700 shadow-md shadow-accent-600/25 transition-colors"
-                  >
-                    <Rocket className="w-4 h-4" />
-                    Bắt đầu phân tích ngay
-                  </a>
+                {/* Focal point: start an analysis right from the hero */}
+                <form
+                  onSubmit={handleHeroSubmit}
+                  className="mt-7 max-w-xl mx-auto lg:mx-0 flex flex-col sm:flex-row gap-2 p-2 rounded-2xl bg-white shadow-2xl shadow-brand-950/40"
+                >
+                  <label htmlFor="hero-url" className="sr-only">Địa chỉ website cần phân tích</label>
+                  <div className="flex-1 flex items-center gap-2.5 px-3">
+                    <Globe className="w-5 h-5 text-slate-400 shrink-0" />
+                    <input
+                      id="hero-url"
+                      type="text"
+                      inputMode="url"
+                      autoComplete="url"
+                      value={heroUrl}
+                      onChange={(e) => setHeroUrl(e.target.value)}
+                      placeholder="Nhập website, vd: tenmien.vn"
+                      className="w-full py-3 bg-transparent text-slate-900 placeholder:text-slate-400 text-base outline-hidden"
+                    />
+                  </div>
                   <button
-                    type="button"
-                    onClick={() => setIsSubscriptionModalOpen(true)}
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-brand-700 dark:text-brand-300 bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-800 hover:bg-brand-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
+                    type="submit"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white text-sm font-bold shadow-md transition-colors cursor-pointer"
                   >
                     <Sparkles className="w-4 h-4" />
-                    Xem bảng giá
+                    Phân tích ngay
                   </button>
-                </div>
+                </form>
 
-                {/* Key numbers */}
-                <dl className="grid grid-cols-4 gap-2 sm:gap-3 max-w-xl mx-auto lg:mx-0">
-                  {[
-                    { value: '8', label: 'bước', color: 'text-brand-600 dark:text-brand-300' },
-                    { value: '35', label: 'tiêu chí', color: 'text-brand-600 dark:text-brand-300' },
-                    { value: '5', label: 'đối thủ', color: 'text-brand-600 dark:text-brand-300' },
-                    { value: '90', label: 'ngày', color: 'text-brand-600 dark:text-brand-300' },
-                  ].map((stat) => (
-                    <div key={stat.label} className="surface-card rounded-xl py-3 px-1 text-center">
-                      <dt className="sr-only">{stat.label}</dt>
-                      <dd className={`text-xl sm:text-2xl font-black ${stat.color}`}>{stat.value}</dd>
-                      <dd className="text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-400">{stat.label}</dd>
-                    </div>
+                <ul className="mt-5 flex flex-wrap justify-center lg:justify-start gap-x-5 gap-y-2 text-xs sm:text-sm text-brand-100/90">
+                  {['Không bịa đặt số liệu', 'Đối thủ thật từ Google', 'Dùng thử miễn phí 24 giờ'].map((t) => (
+                    <li key={t} className="inline-flex items-center gap-1.5">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                      {t}
+                    </li>
                   ))}
-                </dl>
+                  <li>
+                    <button
+                      type="button"
+                      onClick={() => setIsSubscriptionModalOpen(true)}
+                      className="font-semibold text-white underline decoration-white/40 underline-offset-4 hover:decoration-white cursor-pointer"
+                    >
+                      Xem bảng giá →
+                    </button>
+                  </li>
+                </ul>
               </div>
 
-              <div className="relative max-w-md sm:max-w-lg w-full mx-auto">
-                <HeroIllustration className="w-full h-auto" />
+              <div className="relative max-w-md lg:max-w-none w-full mx-auto">
+                <div className="absolute inset-6 rounded-full bg-brand-400/30 blur-3xl" aria-hidden="true" />
+                <HeroIllustration className="relative w-full h-auto drop-shadow-2xl" />
               </div>
+            </div>
+          </section>
+        )}
 
-              {/* 3 Key Highlights */}
-              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-left">
-                {[
-                  { icon: CheckCircle2, title: 'Không bịa đặt số liệu', desc: 'Quan sát thực tế & đối chiếu công khai' },
-                  { icon: TrendingUp, title: 'Tìm 5 đối thủ tự nhiên', desc: 'Lọc bỏ mạng xã hội & sàn TMĐT' },
-                  { icon: Layers, title: 'Lộ trình 90 ngày 10X', desc: 'Kịch bản video, banner & biểu mẫu' },
-                ].map(({ icon: Icon, title, desc }) => (
-                  <div key={title} className="surface-card p-4 rounded-xl flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/60 dark:text-brand-300 flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <strong className="block text-slate-900 dark:text-white">{title}</strong>
-                      <span className="text-xs text-slate-500 dark:text-slate-400">{desc}</span>
-                    </div>
+        {/* Main Content Container */}
+        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+          {/* Key numbers, overlapping the hero band */}
+          {!report && !isLoading && (
+            <section className="-mt-20 sm:-mt-24 mb-10 relative z-10 surface-card rounded-2xl p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:divide-x divide-slate-100 dark:divide-slate-800">
+              {[
+                { icon: Layers, value: '8 bước', label: 'Quy trình phân tích trọn vẹn' },
+                { icon: CheckCircle2, value: '35 tiêu chí', label: 'Nội dung, tin cậy, chuyển đổi' },
+                { icon: TrendingUp, value: '5 đối thủ', label: 'Tìm từ kết quả Google thật' },
+                { icon: Rocket, value: '90 ngày', label: 'Lộ trình hành động cụ thể' },
+              ].map(({ icon: Icon, value, label }) => (
+                <div key={value} className="flex items-center gap-3 sm:justify-center sm:px-2">
+                  <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/60 dark:text-brand-300 flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5" />
                   </div>
-                ))}
-              </div>
+                  <div>
+                    <div className="text-lg sm:text-xl font-black text-slate-900 dark:text-white leading-tight">{value}</div>
+                    <div className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">{label}</div>
+                  </div>
+                </div>
+              ))}
             </section>
           )}
 

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 import { CRITERIA_LIST, CRITERIA_GROUPS } from './src/constants/criteria.ts';
 import { BENCHMARK_CANDIENTU_REPORT } from './src/data/defaultAnalysis.ts';
+import { findGeminiModel } from './src/constants/geminiModels.ts';
 import {
   getPlans,
   savePlans,
@@ -209,12 +210,15 @@ function describeGeminiError(err: any): { status: number; message: string } {
     };
   }
   if (/NOT_FOUND|404|is not supported/i.test(raw)) {
-    return { status: 502, message: `Mô hình AI ${GEMINI_MODEL} hiện không khả dụng với khóa API này. Chi tiết: ${raw.slice(0, 200)}` };
+    return { status: 502, message: `Mô hình AI đã chọn hiện không khả dụng với khóa API này. Hãy chọn model khác trong mục API. Chi tiết: ${raw.slice(0, 200)}` };
   }
   return { status: 502, message: `Không gọi được AI Gemini: ${raw.slice(0, 240) || 'lỗi không xác định'}` };
 }
 
-const GEMINI_MODEL = 'gemini-3.8-flash';
+/** The model the customer picked (x-gemini-model header), restricted to the allow-listed options. */
+function resolveGeminiModel(req: express.Request) {
+  return findGeminiModel((req.headers['x-gemini-model'] || req.body?.model) as string);
+}
 
 /**
  * Keeps only competitor websites that actually respond. AI models (especially without live
@@ -1678,7 +1682,7 @@ app.post('/api/test-gemini', async (req, res) => {
 
     const testAi = getGeminiClient(userApiKey.trim());
     const response = await testAi.models.generateContent({
-      model: GEMINI_MODEL,
+      model: resolveGeminiModel(req).id,
       contents: 'Ping test. Vui lòng phản hồi ngắn gọn "OK".',
     });
 
@@ -1896,13 +1900,14 @@ HÃY TRẢ VỀ DUY NHẤT CHUỖI JSON HỢP LỆ VỚI CÁC TRƯỜNG SAU (KH�
     // 2nd attempt (only for non-account errors): plain generation with strict JSON output.
     let aiData: any = null;
     let lastError: any = null;
+    const model = resolveGeminiModel(req);
     const attempts: Array<{ label: string; config: any }> = [
       { label: 'search', config: { tools: [{ googleSearch: {} }], temperature: 0.2 } },
       { label: 'json', config: { responseMimeType: 'application/json', temperature: 0.2 } },
-    ];
+    ].filter((a) => a.label !== 'search' || model.supportsSearch);
     for (const attempt of attempts) {
       try {
-        const response = await ai.models.generateContent({ model: GEMINI_MODEL, contents: prompt, config: attempt.config });
+        const response = await ai.models.generateContent({ model: model.id, contents: prompt, config: attempt.config });
         const parsed = cleanJsonOutput(response.text || '');
         if (parsed && typeof parsed === 'object' && parsed.businessSummary) {
           aiData = parsed;
@@ -1929,6 +1934,7 @@ HÃY TRẢ VỀ DUY NHẤT CHUỖI JSON HỢP LỆ VỚI CÁC TRƯỜNG SAU (KH�
     }
 
     const full10XReport = buildComprehensive10XReport(normalizedUrl, hostname, aiData, webMeta);
+    full10XReport.aiModel = model.id;
     return res.json(full10XReport);
   } catch (error: any) {
     console.error('Error in /api/analyze-website:', error);
@@ -1976,7 +1982,7 @@ Trả về JSON hợp lệ cho phân đoạn "${section}".
     let responseText = '';
     try {
       const response = await ai.models.generateContent({
-        model: GEMINI_MODEL,
+        model: resolveGeminiModel(req).id,
         contents: prompt,
         config: { temperature: 0.3, responseMimeType: 'application/json' },
       });

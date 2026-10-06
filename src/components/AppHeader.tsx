@@ -34,8 +34,6 @@ interface AppHeaderProps {
   subscriptionStatus?: CustomerSubscriptionStatus | null;
 }
 
-const toolButton =
-  'p-2 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer';
 const menuItem =
   'w-full flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-left text-sm font-medium text-slate-700 dark:text-slate-200 hover:bg-brand-50 dark:hover:bg-slate-800 cursor-pointer';
 
@@ -179,7 +177,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               </button>
             )}
 
-            {/* Desktop-only tools; on smaller screens they live in the "more" menu */}
+            {/* API settings (inside the "more" menu on small screens) */}
             {onOpenApiModal && (
               <button
                 type="button"
@@ -197,44 +195,6 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               </button>
             )}
 
-            {report && (
-              <>
-                <button type="button" onClick={handlePrint} className={`hidden lg:inline-flex ${toolButton}`} title="In báo cáo hoặc lưu dưới dạng PDF">
-                  <Printer className="w-4 h-4" />
-                </button>
-                <button type="button" onClick={handleDownloadTxt} className={`hidden lg:inline-flex ${toolButton}`} title="Xuất báo cáo TXT">
-                  <FileText className="w-4 h-4" />
-                </button>
-              </>
-            )}
-
-            {onToggleLanguage && (
-              <button
-                type="button"
-                onClick={onToggleLanguage}
-                className="hidden lg:inline-flex items-center gap-1 px-2.5 py-2 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-colors cursor-pointer"
-                title="Chuyển đổi ngôn ngữ hiển thị"
-              >
-                <Globe className="w-3.5 h-3.5 text-brand-500" />
-                <span>{languageLabel}</span>
-              </button>
-            )}
-
-            {onOpenAdminModal && (
-              <button type="button" onClick={onOpenAdminModal} className={`hidden lg:inline-flex hover:text-brand-600 dark:hover:text-brand-300 ${toolButton}`} title="Quản trị SePay & Đơn hàng">
-                <Lock className="w-4 h-4" />
-              </button>
-            )}
-
-            <button
-              type="button"
-              onClick={() => setShowConfirmClear(true)}
-              className={`hidden lg:inline-flex hover:text-rose-600 dark:hover:text-rose-400 ${toolButton}`}
-              title="Đặt lại / Xóa dữ liệu đã lưu"
-            >
-              <Trash2 className="w-4 h-4" />
-            </button>
-
             {/* Theme Toggle (always visible) */}
             <button
               type="button"
@@ -246,8 +206,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               {theme === 'dark' ? <Sun className="w-4 h-4 text-amber-300" /> : <Moon className="w-4 h-4 text-brand-600" />}
             </button>
 
-            {/* "More" menu for small and medium screens */}
-            <div className="relative lg:hidden" ref={menuRef}>
+            {/* "More" menu: secondary tools, kept out of the header to reduce clutter */}
+            <div className="relative" ref={menuRef}>
               <button
                 type="button"
                 onClick={() => setIsMenuOpen((v) => !v)}
@@ -270,7 +230,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                     </button>
                   )}
                   {onOpenApiModal && (
-                    <button type="button" role="menuitem" onClick={runFromMenu(onOpenApiModal)} className={menuItem}>
+                    <button type="button" role="menuitem" onClick={runFromMenu(onOpenApiModal)} className={`lg:hidden ${menuItem}`}>
                       <Key className="w-4 h-4 text-brand-500" /> Gemini API Key
                       {hasCustomApiKey && <span className="ml-auto text-[10px] font-bold text-emerald-600">ĐÃ KẾT NỐI</span>}
                     </button>

@@ -12,13 +12,17 @@ import {
   EyeOff,
   Sparkles,
   ShieldCheck,
+  Search,
 } from 'lucide-react';
 import {
   getSavedGeminiApiKey,
   saveGeminiApiKey,
   removeGeminiApiKey,
   testGeminiApiKeyApi,
+  getSavedGeminiModel,
+  saveGeminiModel,
 } from '../services/api';
+import { GEMINI_MODEL_OPTIONS } from '../constants/geminiModels';
 
 interface ApiKeyModalProps {
   isOpen: boolean;
@@ -38,6 +42,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
   const [showKey, setShowKey] = useState<boolean>(false);
   const [isTesting, setIsTesting] = useState<boolean>(false);
   const [testResult, setTestResult] = useState<{ success: boolean; message: string } | null>(null);
+  const [modelId, setModelId] = useState<string>(getSavedGeminiModel());
 
   // Sync state whenever modal opens
   useEffect(() => {
@@ -45,6 +50,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
       const current = getSavedGeminiApiKey();
       setApiKey(current);
       setSavedKey(current);
+      setModelId(getSavedGeminiModel());
       setTestResult(null);
     }
   }, [isOpen]);
@@ -92,21 +98,25 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
     setTestResult(null);
 
     try {
-      await testGeminiApiKeyApi(keyToTest);
+      await testGeminiApiKeyApi(keyToTest, modelId);
       setTestResult({
         success: true,
-        message: 'API đã kết nối thành công.',
+        message: `API đã kết nối thành công với model ${modelId}.`,
       });
       onShowToast('API đã kết nối thành công.', 'success');
     } catch (err: any) {
-      setTestResult({
-        success: false,
-        message: 'API Key không hợp lệ hoặc đã hết hạn, vui lòng kiểm tra lại.',
-      });
-      onShowToast('API Key không hợp lệ hoặc đã hết hạn, vui lòng kiểm tra lại.', 'error');
+      const message = err?.message || 'API Key không hợp lệ hoặc đã hết hạn, vui lòng kiểm tra lại.';
+      setTestResult({ success: false, message });
+      onShowToast(message, 'error');
     } finally {
       setIsTesting(false);
     }
+  };
+
+  const handleSelectModel = (id: string) => {
+    setModelId(id);
+    saveGeminiModel(id);
+    setTestResult(null);
   };
 
   // Handle Open Get API Key Link
@@ -116,7 +126,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-900/60 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden space-y-0 text-slate-800 dark:text-slate-100">
+      <div className="bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-900/60 rounded-2xl max-w-lg w-full max-h-[92vh] overflow-y-auto shadow-2xl space-y-0 text-slate-800 dark:text-slate-100">
         {/* Header */}
         <div className="p-5 bg-gradient-to-r from-brand-600 via-brand-600 to-brand-700 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -190,6 +200,59 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 {showKey ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
+          </div>
+
+          {/* Model picker: cheapest first */}
+          <div className="space-y-1.5">
+            <div className="flex items-baseline justify-between gap-2">
+              <span className="block font-bold text-slate-700 dark:text-slate-300">Chọn model AI:</span>
+              <span className="text-[10px] text-slate-400">Giá / 1 triệu token (vào / ra)</span>
+            </div>
+            <div role="radiogroup" aria-label="Chọn model Gemini" className="grid gap-2">
+              {GEMINI_MODEL_OPTIONS.map((m) => {
+                const selected = m.id === modelId;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    role="radio"
+                    aria-checked={selected}
+                    onClick={() => handleSelectModel(m.id)}
+                    className={`text-left p-3 rounded-xl border transition-colors cursor-pointer ${
+                      selected
+                        ? 'border-brand-500 bg-brand-50 ring-1 ring-brand-500 dark:bg-brand-950/50'
+                        : 'border-slate-200 hover:border-brand-300 dark:border-slate-700 dark:hover:border-brand-700'
+                    }`}
+                  >
+                    <div className="flex items-center gap-2">
+                      <span
+                        className={`w-3.5 h-3.5 rounded-full border-2 shrink-0 ${
+                          selected ? 'border-brand-600 bg-brand-600 shadow-[inset_0_0_0_2px_white] dark:shadow-[inset_0_0_0_2px_#0f172a]' : 'border-slate-300 dark:border-slate-600'
+                        }`}
+                      />
+                      <span className="font-bold text-slate-900 dark:text-white">{m.label}</span>
+                      <span className="px-1.5 py-0.5 rounded-md text-[10px] font-bold bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                        {m.tier}
+                      </span>
+                      <span className="ml-auto font-mono text-[11px] text-slate-500 dark:text-slate-400">{m.price}</span>
+                    </div>
+                    <p className="mt-1 pl-5.5 text-[11px] leading-snug text-slate-500 dark:text-slate-400">{m.description}</p>
+                    <div className="mt-1 pl-5.5 flex flex-wrap gap-x-3 text-[10px] font-semibold">
+                      <span className={m.supportsSearch ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'}>
+                        <Search className="inline w-3 h-3 mr-0.5 -mt-0.5" />
+                        {m.supportsSearch ? 'Có tra cứu Google' : 'Không tra cứu Google'}
+                      </span>
+                      <span className={m.freeTier ? 'text-emerald-600 dark:text-emerald-400' : 'text-amber-600 dark:text-amber-400'}>
+                        {m.freeTier ? 'Có gói miễn phí' : 'Chỉ gói trả phí'}
+                      </span>
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+            <p className="text-[10px] text-slate-400 leading-snug">
+              Lựa chọn được lưu ngay trên trình duyệt này. Giá tham khảo theo bảng giá Google AI (10/2026), có thể thay đổi.
+            </p>
           </div>
 
           {/* Test Result Message Banner */}

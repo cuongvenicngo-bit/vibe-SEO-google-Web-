@@ -1,6 +1,24 @@
 import { AnalysisReport, WebsiteInputForm } from '../types';
+import { DEFAULT_GEMINI_MODEL, findGeminiModel } from '../constants/geminiModels';
 
 export const GEMINI_API_KEY_STORAGE_KEY = 'web360_gemini_api_key';
+export const GEMINI_MODEL_STORAGE_KEY = 'web360_gemini_model';
+
+export function getSavedGeminiModel(): string {
+  try {
+    return findGeminiModel(localStorage.getItem(GEMINI_MODEL_STORAGE_KEY)).id;
+  } catch {
+    return DEFAULT_GEMINI_MODEL;
+  }
+}
+
+export function saveGeminiModel(modelId: string): void {
+  try {
+    localStorage.setItem(GEMINI_MODEL_STORAGE_KEY, findGeminiModel(modelId).id);
+  } catch (err) {
+    console.error('Failed to save Gemini model to localStorage:', err);
+  }
+}
 
 // Helper to get custom Gemini API Key from localStorage
 export function getSavedGeminiApiKey(): string {
@@ -33,6 +51,7 @@ export function removeGeminiApiKey(): void {
 function getApiHeaders(): Record<string, string> {
   const headers: Record<string, string> = {
     'Content-Type': 'application/json',
+    'x-gemini-model': getSavedGeminiModel(),
   };
   const customKey = getSavedGeminiApiKey();
   if (customKey) {
@@ -48,12 +67,16 @@ function getApiHeaders(): Record<string, string> {
 }
 
 // Test Gemini API Key
-export async function testGeminiApiKeyApi(apiKey: string): Promise<{ success: boolean; message: string }> {
+export async function testGeminiApiKeyApi(
+  apiKey: string,
+  modelId: string = getSavedGeminiModel()
+): Promise<{ success: boolean; message: string }> {
   const response = await fetch('/api/test-gemini', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'x-gemini-api-key': apiKey.trim(),
+      'x-gemini-model': modelId,
     },
     body: JSON.stringify({ apiKey: apiKey.trim() }),
   });
