@@ -58,6 +58,7 @@
   --card-border: #dbe3ef;
   --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px -14px rgba(30, 64, 175, 0.18);
   --step-body-bg: #f6f8fc;
+  --card-locked-bg: #f9fbfe;
   --step-header-from: #eaf1ff;
   --step-header-border: #e1e8f5;
   --table-head-bg: #eaf1ff;
@@ -74,6 +75,7 @@
   --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
   /* Darker than the card so inner cards (slate-850) stand forward. */
   --step-body-bg: #0b1222;
+  --card-locked-bg: #0c1426;
   --step-header-from: rgba(37, 99, 235, 0.18);
   --step-header-border: #1e293b;
   --table-head-bg: #15213b;
@@ -219,6 +221,63 @@
   inset: 0 auto 0 0;
   width: 3px;
   background: var(--color-brand-500);
+}
+
+/* Roadmap connector: a line runs behind the cards through the step badges, visible in the gaps. */
+.step-timeline {
+  position: relative;
+}
+
+.step-timeline::before {
+  content: '';
+  position: absolute;
+  top: 2.5rem;
+  bottom: 2.5rem;
+  left: calc(1.5rem + 22px - 1px);
+  width: 2px;
+  background-image: linear-gradient(180deg, var(--color-brand-400) 0 50%, transparent 50% 100%);
+  background-size: 2px 10px;
+  opacity: 0.55;
+}
+
+@media (min-width: 640px) {
+  .step-timeline::before {
+    left: calc(1.75rem + 22px - 1px);
+  }
+}
+
+.step-timeline > .step-card {
+  z-index: 1;
+}
+
+/* The step to start with gets a soft blue glow. */
+.step-card[data-state='current'] {
+  border-color: var(--color-brand-300);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.08), var(--card-shadow);
+}
+
+.dark .step-card[data-state='current'] {
+  border-color: var(--color-brand-700);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12), var(--card-shadow);
+}
+
+/* Steps unlocked by the analysis: quieter card, neutral rail, no blue header wash. */
+.step-card[data-state='locked']::before {
+  background: var(--color-slate-300);
+}
+
+.dark .step-card[data-state='locked']::before {
+  background: var(--color-slate-700);
+}
+
+.step-card[data-state='locked'] .step-header {
+  background-image: none;
+  border-bottom-color: transparent;
+}
+
+.step-card[data-state='locked'] {
+  background-color: var(--card-locked-bg);
+  box-shadow: none;
 }
 
 /* Data tables: tinted header row, restrained striping and a clear hover state. */

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StepStatus } from '../types';
-import { CheckCircle2, Clock, AlertTriangle, AlertCircle, CircleDot, ChevronDown } from 'lucide-react';
+import { CheckCircle2, AlertTriangle, AlertCircle, CircleDot, ChevronDown, Lock, Sparkles } from 'lucide-react';
 import { STEP_ICONS } from './stepThemes';
 
 interface StepWrapperProps {
@@ -24,6 +24,9 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
 }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const Icon = STEP_ICONS[stepNumber] || STEP_ICONS[1];
+  // Before the first analysis: step 1 is where the user starts, steps 2-8 are previews.
+  const isLocked = status === 'not_started' && stepNumber > 1;
+  const isCurrent = status === 'not_started' && stepNumber === 1;
 
   const getStatusBadge = () => {
     switch (status) {
@@ -57,10 +60,15 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         );
       case 'not_started':
       default:
-        return (
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
-            <Clock className="w-3.5 h-3.5" />
-            Chưa thực hiện
+        return isCurrent ? (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold rounded-full bg-brand-600 text-white shadow-sm shadow-brand-600/30">
+            <Sparkles className="w-3.5 h-3.5" />
+            Bắt đầu tại đây
+          </span>
+        ) : (
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 text-xs font-medium rounded-full bg-slate-100 dark:bg-slate-800/80 text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700">
+            <Lock className="w-3 h-3" />
+            Mở sau khi phân tích
           </span>
         );
     }
@@ -69,6 +77,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
   return (
     <section
       id={`buoc-${stepNumber}`}
+      data-state={isLocked ? 'locked' : isCurrent ? 'current' : undefined}
       className="step-card surface-card relative rounded-2xl transition-all mb-6 overflow-hidden scroll-mt-20"
     >
       {/* Step Header */}
@@ -77,13 +86,19 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-start sm:items-center gap-3.5 min-w-0">
-          <div className="w-11 h-11 rounded-xl bg-brand-600 text-white shadow-sm shadow-brand-600/30 flex flex-col items-center justify-center shrink-0 leading-none">
+          <div
+            className={`w-11 h-11 rounded-xl flex flex-col items-center justify-center shrink-0 leading-none ${
+              isLocked
+                ? 'bg-brand-50 text-brand-600 ring-1 ring-brand-200 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800'
+                : 'bg-brand-600 text-white shadow-sm shadow-brand-600/30'
+            }`}
+          >
             <Icon className="w-4 h-4 mb-0.5 opacity-90" />
             <span className="text-[11px] font-black">{stepNumber}</span>
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white">
+              <h2 className={`text-base sm:text-lg font-bold ${isLocked ? 'text-slate-700 dark:text-slate-200' : 'text-slate-900 dark:text-white'}`}>
                 {title}
               </h2>
               {getStatusBadge()}

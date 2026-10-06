@@ -537,8 +537,8 @@ export default function App() {
             </nav>
           )}
 
-          {/* 8 Steps Vertical Workflow */}
-          <div>
+          {/* 8 Steps Vertical Workflow (a connector line joins the cards like a roadmap) */}
+          <div className="step-timeline">
             {/* BƯỚC 1: Nhập website và tìm đối thủ */}
             <StepWrapper
               stepNumber={1}
