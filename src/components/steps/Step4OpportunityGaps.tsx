@@ -155,7 +155,13 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
           return (
             <div
               key={key}
-              className="bg-white dark:bg-slate-850 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-5 space-y-4 hover:border-slate-300 dark:hover:border-slate-700 transition-all flex flex-col justify-between shadow-xs"
+              className={`accent-card bg-white dark:bg-slate-850 rounded-2xl border border-slate-200/90 dark:border-slate-800 p-5 space-y-4 flex flex-col justify-between ${
+                isUrgent
+                  ? 'border-t-rose-400 dark:border-t-rose-500/80'
+                  : isImprove
+                  ? 'border-t-amber-400 dark:border-t-amber-500/80'
+                  : 'border-t-brand-500 dark:border-t-brand-400/80'
+              }`}
             >
               <div className="space-y-3">
                 {/* Badge & Order */}
@@ -226,7 +232,7 @@ export const Step4OpportunityGaps: React.FC<Step4OpportunityGapsProps> = ({
                   className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
                     isAdded
                       ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-800 cursor-default'
-                      : 'bg-brand-600 hover:bg-brand-700 text-white shadow-xs'
+                      : 'btn-primary text-white'
                   }`}
                 >
                   {isAdded ? (

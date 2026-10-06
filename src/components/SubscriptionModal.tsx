@@ -407,7 +407,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                             }}
                             className={`w-full py-2 px-3 rounded-lg font-bold text-xs transition-all cursor-pointer ${
                               isSelected
-                                ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-sm'
+                                ? 'btn-primary text-white'
                                 : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200'
                             }`}
                           >
@@ -425,7 +425,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl btn-cta text-white font-bold text-xs transition-all cursor-pointer"
                   >
                     <span>Tiếp tục: Nhập thông tin</span>
                     <ArrowRight className="w-4 h-4" />
@@ -573,7 +573,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   type="button"
                   onClick={handleProceedToPayment}
                   disabled={isCreatingOrder}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl btn-cta text-white font-bold text-xs transition-all cursor-pointer disabled:opacity-50"
                 >
                   {isCreatingOrder ? (
                     <>
@@ -695,7 +695,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         <button
                           type="button"
                           onClick={() => copyToClipboard(currentOrder.order_code, 'content')}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-[10px] font-bold cursor-pointer transition-colors shadow-2xs"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md btn-primary text-white text-[10px] font-bold cursor-pointer"
                         >
                           {hasCopiedContent ? (
                             <>
@@ -750,7 +750,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm cursor-pointer"
+                    className="px-4 py-2 rounded-xl btn-primary text-white font-bold text-xs cursor-pointer"
                   >
                     Tôi sẽ chuyển khoản sau
                   </button>
@@ -806,7 +806,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-8 py-3 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer"
+                  className="px-8 py-3 rounded-xl btn-cta text-white font-extrabold text-sm transition-all cursor-pointer"
                 >
                   Bắt đầu sử dụng ngay
                 </button>

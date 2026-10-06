@@ -129,8 +129,8 @@ export const D3RadarChart: React.FC<D3RadarChartProps> = ({
       list.push({
         id: 'series-user',
         name: 'Website của bạn',
-        color: '#6366f1',
-        fillOpacity: 0.32,
+        color: '#2563eb',
+        fillOpacity: 0.2,
         strokeWidth: 2.6,
         points: computePoints((d) => d.userScore),
       });
@@ -565,26 +565,26 @@ export const D3RadarChart: React.FC<D3RadarChartProps> = ({
       {/* Interactive Tooltip Card on Hover */}
       {hoveredPoint && (
         <div
-          className="absolute z-50 pointer-events-none bg-slate-900/95 dark:bg-slate-950/95 text-white px-3.5 py-2.5 rounded-xl border border-slate-700/80 shadow-2xl text-xs space-y-1 backdrop-blur-md transition-opacity duration-150 animate-in fade-in zoom-in-95"
+          className="chart-tooltip absolute z-50 pointer-events-none px-3.5 py-2.5 rounded-xl text-xs space-y-1 transition-opacity duration-150 animate-in"
           style={{
             left: `${(hoveredPoint.x / size) * 100}%`,
             top: `${(hoveredPoint.y / size) * 100}%`,
             transform: 'translate(-50%, -125%)',
           }}
         >
-          <div className="flex items-center gap-1.5 border-b border-slate-800 pb-1 font-bold text-slate-100">
+          <div className="flex items-center gap-1.5 border-b border-slate-200 dark:border-slate-700 pb-1 font-bold text-slate-900 dark:text-white">
             <span
               className="w-2.5 h-2.5 rounded-full inline-block shrink-0 shadow-xs"
               style={{ backgroundColor: hoveredPoint.color }}
             />
             <span className="truncate max-w-[180px]">{hoveredPoint.seriesName}</span>
           </div>
-          <div className="text-[11px] text-slate-300 font-semibold truncate max-w-[200px]">
+          <div className="text-[11px] text-slate-600 dark:text-slate-300 font-semibold truncate max-w-[200px]">
             {hoveredPoint.fullName}
           </div>
           <div className="flex items-center justify-between gap-4 pt-0.5 text-xs">
-            <span className="text-slate-400">Mức đáp ứng:</span>
-            <span className="font-extrabold text-sm text-white">{hoveredPoint.score}%</span>
+            <span className="text-slate-500 dark:text-slate-400">Mức đáp ứng:</span>
+            <span className="font-extrabold text-sm text-brand-700 dark:text-white">{hoveredPoint.score}%</span>
           </div>
         </div>
       )}

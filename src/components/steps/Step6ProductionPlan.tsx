@@ -197,7 +197,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
                     {b.subtitle}
                   </p>
                   <div className="pt-2">
-                    <span className="inline-block px-3 py-1 bg-brand-500 hover:bg-brand-600 text-white rounded-md font-bold text-xs shadow-xs">
+                    <span className="inline-block px-3 py-1 bg-brand-600 hover:bg-brand-700 text-white rounded-md font-bold text-xs shadow-xs">
                       {b.buttonText} →
                     </span>
                   </div>
@@ -390,7 +390,7 @@ export const Step6ProductionPlan: React.FC<Step6ProductionPlanProps> = ({
 
                 <button
                   type="button"
-                  className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-brand-600 hover:bg-brand-700 transition-colors shadow-xs cursor-pointer"
+                  className="w-full py-2.5 rounded-xl text-xs font-bold text-white btn-primary cursor-pointer"
                 >
                   {pkg.ctaText || 'Nhận báo giá chi tiết'}
                 </button>

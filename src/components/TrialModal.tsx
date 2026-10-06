@@ -164,7 +164,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
+                  className="w-full py-2.5 rounded-xl btn-primary text-white font-bold text-xs cursor-pointer"
                 >
                   Bắt đầu sử dụng
                 </button>
@@ -270,7 +270,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full py-2.5 rounded-xl btn-cta text-white font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>

@@ -913,7 +913,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
             </div>
 
             {/* D3 Radar Canvas with Smooth Entry and Exit Transitions */}
-            <div className="h-[390px] sm:h-[450px] w-full flex flex-col items-center justify-center relative">
+            <div className="radar-stage h-[390px] sm:h-[450px] w-full flex flex-col items-center justify-center relative">
               <D3RadarChart
                 data={activeDataset}
                 actualCompetitors={actualCompetitors}
@@ -940,12 +940,12 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
           <div className="lg:col-span-5 xl:col-span-4 space-y-4">
             {/* Quick Score Metrics */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="p-3.5 rounded-xl bg-brand-50/70 dark:bg-brand-950/40 border border-brand-200/60 dark:border-brand-850">
+              <div className="kpi-tile p-3.5" style={{ '--kpi-accent': 'linear-gradient(90deg, #2563eb, #22d3ee)', '--kpi-glow': 'rgba(37, 99, 235, 0.12)' } as React.CSSProperties}>
                 <span className="text-[11px] font-bold text-brand-700 dark:text-brand-300 block uppercase tracking-wider">
                   Mức đáp ứng của bạn
                 </span>
                 <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-2xl font-black text-brand-600 dark:text-brand-400">
+                  <span className="text-3xl font-black tracking-tight text-brand-600 dark:text-brand-300">
                     {stats.avgUser}%
                   </span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -954,12 +954,12 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-amber-50/70 dark:bg-amber-950/40 border border-amber-200/60 dark:border-amber-900/40">
+              <div className="kpi-tile p-3.5" style={{ '--kpi-accent': 'linear-gradient(90deg, #f59e0b, #fb923c)', '--kpi-glow': 'rgba(245, 158, 11, 0.12)' } as React.CSSProperties}>
                 <span className="text-[11px] font-bold text-amber-700 dark:text-amber-300 block uppercase tracking-wider">
                   Mức TB đối thủ
                 </span>
                 <div className="flex items-baseline gap-1 mt-1">
-                  <span className="text-2xl font-black text-amber-600 dark:text-amber-400">
+                  <span className="text-3xl font-black tracking-tight text-amber-600 dark:text-amber-300">
                     {activeCompetitors.length > 0 ? `${stats.avgComp}%` : 'Chưa chọn'}
                   </span>
                   <span className="text-[11px] text-slate-500 dark:text-slate-400">
@@ -970,7 +970,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
             </div>
 
             {/* Comparative Status Breakdown */}
-            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/80 dark:border-slate-750 space-y-2.5 text-xs">
+            <div className="p-4 rounded-xl bg-slate-50 dark:bg-slate-850 border border-slate-200/80 dark:border-slate-750 space-y-2.5 text-xs shadow-xs">
               <div className="font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between">
                 <span>So sánh phạm vi đang lọc:</span>
                 {activeCompetitors.length > 0 && (

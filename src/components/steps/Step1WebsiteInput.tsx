@@ -366,7 +366,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                 <button
                   type="button"
                   onClick={onOpenSubscriptionModal}
-                  className="px-4 py-2 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-xs transition-colors cursor-pointer inline-flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-lg btn-primary text-white font-bold text-xs cursor-pointer inline-flex items-center gap-1.5"
                 >
                   <CreditCard className="w-3.5 h-3.5" />
                   <span>{subscriptionStatus?.is_expired ? 'Gia hạn gói' : 'Mua gói'}</span>
@@ -392,7 +392,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
             <button
               type="button"
               onClick={onOpenSubscriptionModal}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-accent-600 hover:bg-accent-700 shadow-md inline-flex items-center justify-center gap-2 cursor-pointer transition-all"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white btn-cta inline-flex items-center justify-center gap-2 cursor-pointer transition-all"
             >
               <Lock className="w-4 h-4" />
               <span>
@@ -405,7 +405,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
             <button
               type="submit"
               disabled={isLoading || !inputData.url.trim()}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white bg-accent-600 hover:bg-accent-700 active:bg-accent-800 shadow-md shadow-accent-600/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3.5 rounded-xl font-bold text-sm text-white btn-cta disabled:opacity-50 disabled:cursor-not-allowed transition-all inline-flex items-center justify-center gap-2 cursor-pointer"
             >
               {isLoading ? (
                 <>

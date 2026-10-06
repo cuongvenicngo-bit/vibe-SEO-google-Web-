@@ -326,7 +326,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="flex-1 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer disabled:opacity-50"
+                  className="flex-1 py-2.5 rounded-xl btn-primary text-white font-bold text-xs cursor-pointer disabled:opacity-50"
                 >
                   {isVerifying ? 'Đang xác thực...' : 'Đăng nhập'}
                 </button>
@@ -337,16 +337,16 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
           /* Authenticated Dashboard */
           <>
             {/* Header */}
-            <div className="p-4 sm:p-5 bg-gradient-to-r from-slate-900 via-brand-950 to-brand-950 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
+            <div className="p-4 sm:p-5 bg-gradient-to-r from-[#09235f] via-[#123d9c] to-[#2463eb] text-white flex items-center justify-between border-b border-white/10 shrink-0">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-brand-600/30 border border-brand-500/40 flex items-center justify-center text-brand-400">
+                <div className="w-10 h-10 rounded-xl bg-white/10 border border-white/20 flex items-center justify-center text-white">
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <div>
                   <h3 className="text-base font-bold flex items-center gap-2">
                     Trung tâm Quản trị SePay & Gói dịch vụ
                   </h3>
-                  <p className="text-xs text-slate-400">
+                  <p className="text-xs text-brand-100/80">
                     Quản lý doanh thu, webhook giao dịch, gói cước và người dùng dùng thử
                   </p>
                 </div>
@@ -513,7 +513,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                         type="button"
                         onClick={handleSavePlans}
                         disabled={isSaving}
-                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold cursor-pointer shadow-xs disabled:opacity-50"
+                        className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg btn-primary text-white font-bold cursor-pointer disabled:opacity-50"
                       >
                         <Save className="w-3.5 h-3.5" />
                         <span>{isSaving ? 'Đang lưu...' : 'Lưu danh sách gói'}</span>
@@ -657,7 +657,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       type="button"
                       onClick={handleSaveSePaySettings}
                       disabled={isSaving}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold cursor-pointer shadow-xs"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg btn-primary text-white font-bold cursor-pointer"
                     >
                       <Save className="w-3.5 h-3.5" />
                       <span>{isSaving ? 'Đang lưu...' : 'Lưu cấu hình SePay'}</span>
@@ -673,7 +673,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       <button
                         type="button"
                         onClick={copyWebhookUrl}
-                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-brand-600 hover:bg-brand-700 text-white font-bold text-[10px] cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md btn-primary text-white font-bold text-[10px] cursor-pointer"
                       >
                         {hasCopiedWebhook ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
                         <span>Sao chép URL</span>
@@ -917,7 +917,7 @@ export const AdminDashboardModal: React.FC<AdminDashboardModalProps> = ({
                       type="button"
                       onClick={handleSaveTrialSettings}
                       disabled={isSaving}
-                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-600 hover:bg-brand-700 text-white font-bold cursor-pointer shadow-xs"
+                      className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg btn-primary text-white font-bold cursor-pointer"
                     >
                       <Save className="w-3.5 h-3.5" />
                       <span>{isSaving ? 'Đang lưu...' : 'Lưu cấu hình'}</span>

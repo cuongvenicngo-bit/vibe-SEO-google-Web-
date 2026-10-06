@@ -74,7 +74,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
             </p>
           </div>
 
-          <div className="text-right">
+          <div className="text-right shrink-0 whitespace-nowrap">
             <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">Tiến độ tổng thể:</span>
             <div className="text-lg font-extrabold text-brand-600 dark:text-brand-400">
               {progressPercent}% <span className="text-xs text-slate-400 font-normal">({completedCount}/{allTasks.length} việc)</span>
@@ -102,7 +102,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
           >
             <div className="flex items-center justify-between font-bold text-rose-700 dark:text-rose-300 mb-1">
               <span>Giai đoạn 1: Sửa lỗi & Tác động nhanh</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-rose-100 dark:bg-rose-900 text-rose-800 dark:text-rose-200">
+              <span className="text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 bg-rose-100 dark:bg-rose-900 text-rose-800 dark:text-rose-200">
                 Ngày 1 - 14
               </span>
             </div>
@@ -121,7 +121,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
           >
             <div className="flex items-center justify-between font-bold text-amber-700 dark:text-amber-300 mb-1">
               <span>Giai đoạn 2: Chiếm khoảng trống cơ hội</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200">
+              <span className="text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200">
                 Ngày 15 - 45
               </span>
             </div>
@@ -140,7 +140,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
           >
             <div className="flex items-center justify-between font-bold text-brand-700 dark:text-brand-300 mb-1">
               <span>Giai đoạn 3: Xây dựng chiều sâu</span>
-              <span className="text-[10px] px-2 py-0.5 rounded-full bg-brand-100 dark:bg-brand-900 text-brand-800 dark:text-brand-200">
+              <span className="text-[10px] px-2 py-0.5 rounded-full whitespace-nowrap shrink-0 bg-brand-100 dark:bg-brand-900 text-brand-800 dark:text-brand-200">
                 Ngày 46 - 90
               </span>
             </div>
@@ -197,7 +197,13 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
           return (
             <div
               key={t.id || idx}
-              className={`p-4 sm:p-5 rounded-2xl border transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 ${
+              className={`p-4 sm:p-5 rounded-2xl border border-l-[3px] transition-all flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:shadow-md ${
+                phaseNum === 1
+                  ? 'border-l-rose-400 dark:border-l-rose-500/80'
+                  : phaseNum === 2
+                  ? 'border-l-amber-400 dark:border-l-amber-500/80'
+                  : 'border-l-brand-500 dark:border-l-brand-400/80'
+              } ${
                 isDone
                   ? 'bg-slate-50/70 dark:bg-slate-900/50 border-slate-200 dark:border-slate-800 opacity-80'
                   : isInProgress

@@ -160,7 +160,7 @@ export const Step3CriteriaComparison: React.FC<Step3CriteriaComparisonProps> = (
                 </span>
                 <span
                   className={`px-1.5 py-0.5 rounded text-[10px] font-bold ${
-                    r.isUserSite ? 'bg-white/20 text-white' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
+                    r.isUserSite ? 'bg-brand-800/70 text-white ring-1 ring-white/20' : 'bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300'
                   }`}
                 >
                   {r.overallRank}

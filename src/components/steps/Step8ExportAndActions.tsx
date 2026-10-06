@@ -70,7 +70,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
             <button
               type="button"
               onClick={handleDownload}
-              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs text-white bg-brand-600 hover:bg-brand-700 active:bg-brand-800 shadow-sm shadow-brand-600/20 transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl font-bold text-xs text-white btn-primary transition-all cursor-pointer"
             >
               <FileText className="w-4 h-4" />
               <span>Tải file TXT (UTF-8)</span>

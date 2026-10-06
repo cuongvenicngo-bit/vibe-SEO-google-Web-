@@ -413,7 +413,7 @@ export default function App() {
                   </div>
                   <button
                     type="submit"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white text-sm font-bold shadow-md transition-colors cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl btn-cta text-white text-sm font-bold cursor-pointer"
                   >
                     <Sparkles className="w-4 h-4" />
                     Phân tích ngay
@@ -538,7 +538,7 @@ export default function App() {
           )}
 
           {/* 8 Steps Vertical Workflow (a connector line joins the cards like a roadmap) */}
-          <div className="step-timeline">
+          <div className="step-timeline" data-complete={report ? 'true' : undefined}>
             {/* BƯỚC 1: Nhập website và tìm đối thủ */}
             <StepWrapper
               stepNumber={1}

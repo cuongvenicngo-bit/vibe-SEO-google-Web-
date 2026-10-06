@@ -355,7 +355,13 @@ ${!p.isUserSite ? `- Điều có thể học hỏi: ${p.learningsForUser?.join('
             {actionableFindings.map((finding: ActionableFinding) => (
               <div
                 key={finding.id}
-                className="p-4 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700/80 shadow-xs flex flex-col justify-between"
+                className={`accent-card p-4 rounded-xl bg-white dark:bg-slate-850 border border-slate-200 dark:border-slate-700/80 flex flex-col justify-between ${
+                  finding.category === 'Ưu tiên sửa'
+                    ? 'border-t-rose-400 dark:border-t-rose-500/80'
+                    : finding.category === 'Nên giữ và nâng cấp'
+                    ? 'border-t-emerald-400 dark:border-t-emerald-500/80'
+                    : 'border-t-brand-500 dark:border-t-brand-400/80'
+                }`}
               >
                 <div>
                   <div className="flex items-center justify-between gap-2 mb-2">

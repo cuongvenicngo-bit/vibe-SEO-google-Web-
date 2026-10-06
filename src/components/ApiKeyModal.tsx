@@ -334,7 +334,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 type="button"
                 onClick={handleSave}
                 disabled={!apiKey.trim()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition-all shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl btn-primary text-white font-bold transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>Lưu API</span>

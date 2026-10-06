@@ -90,7 +90,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
             className={`w-11 h-11 rounded-xl flex flex-col items-center justify-center shrink-0 leading-none ${
               isLocked
                 ? 'bg-brand-50 text-brand-600 ring-1 ring-brand-200 dark:bg-brand-950/50 dark:text-brand-300 dark:ring-brand-800'
-                : 'bg-brand-600 text-white shadow-sm shadow-brand-600/30'
+                : 'step-badge'
             }`}
           >
             <Icon className="w-4 h-4 mb-0.5 opacity-90" />
@@ -98,7 +98,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
           </div>
           <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
-              <h2 className={`text-base sm:text-lg font-bold ${isLocked ? 'text-slate-700 dark:text-slate-200' : 'text-slate-900 dark:text-white'}`}>
+              <h2 className={`text-base sm:text-lg font-bold tracking-tight ${isLocked ? 'text-slate-700 dark:text-slate-200' : 'text-slate-900 dark:text-white'}`}>
                 {title}
               </h2>
               {getStatusBadge()}

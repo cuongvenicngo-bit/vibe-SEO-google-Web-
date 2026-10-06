@@ -354,8 +354,8 @@ export const STATUS_META = {
   good: {
     label: '● Có',
     tooltip: 'Đáp ứng đủ trong nội dung đã kiểm tra',
-    color: 'sky',
-    badgeClass: 'text-sky-700 dark:text-sky-300 font-semibold',
+    color: 'emerald',
+    badgeClass: 'text-emerald-700 dark:text-emerald-300 font-semibold',
   },
   partial: {
     label: '◓ Chưa đủ',

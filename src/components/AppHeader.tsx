@@ -169,7 +169,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               <button
                 type="button"
                 onClick={onOpenSubscriptionModal}
-                className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold whitespace-nowrap text-white bg-accent-600 hover:bg-accent-700 rounded-xl shadow-sm transition-colors cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold whitespace-nowrap text-white btn-cta rounded-xl cursor-pointer"
                 title="Xem bảng giá và thanh toán tự động qua SePay"
               >
                 <CreditCard className="w-3.5 h-3.5" />
