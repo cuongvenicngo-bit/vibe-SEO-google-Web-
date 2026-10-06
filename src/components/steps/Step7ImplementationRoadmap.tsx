@@ -85,7 +85,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
         {/* Progress Bar */}
         <div className="w-full bg-slate-100 dark:bg-slate-750 h-2.5 rounded-full overflow-hidden">
           <div
-            className="bg-gradient-to-r from-brand-500 via-sky-500 to-emerald-500 h-full transition-all duration-300 rounded-full"
+            className="bg-gradient-to-r from-brand-500 via-brand-500 to-emerald-500 h-full transition-all duration-300 rounded-full"
             style={{ width: `${progressPercent}%` }}
           />
         </div>

@@ -42,7 +42,7 @@ fs.writeFileSync(
       handler: 'index.mjs',
       launcherType: 'Nodejs',
       shouldAddHelpers: false,
-      maxDuration: 120,
+      maxDuration: 300,
     },
     null,
     2

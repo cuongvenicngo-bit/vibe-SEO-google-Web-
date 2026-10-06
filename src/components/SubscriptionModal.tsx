@@ -235,9 +235,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-slate-900 border border-ocean-200 dark:border-ocean-900/60 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+      <div className="bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-900/60 rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
         {/* Header with step progress */}
-        <div className="p-4 sm:p-5 bg-gradient-to-r from-ocean-700 via-brand-700 to-ocean-600 text-white shrink-0">
+        <div className="p-4 sm:p-5 bg-gradient-to-r from-brand-700 via-brand-700 to-brand-600 text-white shrink-0">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center">
@@ -247,7 +247,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <h3 className="text-base font-bold flex items-center gap-2">
                   Mua gói sử dụng PHÂN TÍCH WEB 360
                 </h3>
-                <p className="text-xs text-ocean-100">
+                <p className="text-xs text-brand-100">
                   Thanh toán tự động qua SePay · Kích hoạt ngay tức thì
                 </p>
               </div>
@@ -265,12 +265,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           <div className="grid grid-cols-4 gap-1.5 sm:gap-2 mt-4 pt-3 border-t border-white/15 text-[11px] font-semibold">
             <div
               className={`flex items-center gap-1.5 ${
-                step >= 1 ? 'text-white' : 'text-ocean-200/60'
+                step >= 1 ? 'text-white' : 'text-brand-200/60'
               }`}
             >
               <span
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0 ${
-                  step >= 1 ? 'bg-white text-ocean-700 font-bold' : 'bg-white/20 text-white'
+                  step >= 1 ? 'bg-white text-brand-700 font-bold' : 'bg-white/20 text-white'
                 }`}
               >
                 1
@@ -280,12 +280,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             <div
               className={`flex items-center gap-1.5 ${
-                step >= 2 ? 'text-white' : 'text-ocean-200/60'
+                step >= 2 ? 'text-white' : 'text-brand-200/60'
               }`}
             >
               <span
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0 ${
-                  step >= 2 ? 'bg-white text-ocean-700 font-bold' : 'bg-white/20 text-white'
+                  step >= 2 ? 'bg-white text-brand-700 font-bold' : 'bg-white/20 text-white'
                 }`}
               >
                 2
@@ -295,12 +295,12 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             <div
               className={`flex items-center gap-1.5 ${
-                step >= 3 ? 'text-white' : 'text-ocean-200/60'
+                step >= 3 ? 'text-white' : 'text-brand-200/60'
               }`}
             >
               <span
                 className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] shrink-0 ${
-                  step >= 3 ? 'bg-white text-ocean-700 font-bold' : 'bg-white/20 text-white'
+                  step >= 3 ? 'bg-white text-brand-700 font-bold' : 'bg-white/20 text-white'
                 }`}
               >
                 3
@@ -310,7 +310,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
             <div
               className={`flex items-center gap-1.5 ${
-                step === 4 ? 'text-white' : 'text-ocean-200/60'
+                step === 4 ? 'text-white' : 'text-brand-200/60'
               }`}
             >
               <span
@@ -341,7 +341,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
 
               {isLoadingPlans ? (
                 <div className="py-12 flex flex-col items-center justify-center space-y-2 text-slate-400">
-                  <Loader2 className="w-7 h-7 animate-spin text-ocean-600" />
+                  <Loader2 className="w-7 h-7 animate-spin text-brand-600" />
                   <span className="text-xs">Đang tải danh sách gói...</span>
                 </div>
               ) : (
@@ -354,7 +354,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         onClick={() => setSelectedPlan(p)}
                         className={`relative rounded-xl border p-4 flex flex-col justify-between transition-all cursor-pointer select-none ${
                           isSelected
-                            ? 'border-ocean-600 dark:border-ocean-500 bg-ocean-50/50 dark:bg-ocean-950/40 ring-2 ring-ocean-500/20 shadow-md'
+                            ? 'border-brand-600 dark:border-brand-500 bg-brand-50/50 dark:bg-brand-950/40 ring-2 ring-brand-500/20 shadow-md'
                             : 'border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 bg-white dark:bg-slate-850'
                         }`}
                       >
@@ -376,7 +376,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           </div>
 
                           <div className="pt-1">
-                            <span className="text-xl font-extrabold text-ocean-600 dark:text-ocean-400">
+                            <span className="text-xl font-extrabold text-brand-600 dark:text-brand-400">
                               {formatPrice(p.price)}
                             </span>
                           </div>
@@ -407,7 +407,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                             }}
                             className={`w-full py-2 px-3 rounded-lg font-bold text-xs transition-all cursor-pointer ${
                               isSelected
-                                ? 'bg-ocean-600 hover:bg-ocean-700 text-white shadow-sm'
+                                ? 'bg-brand-600 hover:bg-brand-700 text-white shadow-sm'
                                 : 'bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200'
                             }`}
                           >
@@ -425,7 +425,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
                   >
                     <span>Tiếp tục: Nhập thông tin</span>
                     <ArrowRight className="w-4 h-4" />
@@ -439,9 +439,9 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
           {step === 2 && selectedPlan && (
             <div className="space-y-4">
               {/* Selected Plan Summary Banner */}
-              <div className="p-3.5 rounded-xl bg-ocean-50/80 dark:bg-ocean-950/40 border border-ocean-200 dark:border-ocean-900/60 flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-brand-50/80 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900/60 flex items-center justify-between">
                 <div>
-                  <span className="text-[11px] font-semibold text-ocean-600 dark:text-ocean-400 block">
+                  <span className="text-[11px] font-semibold text-brand-600 dark:text-brand-400 block">
                     Gói dịch vụ đã chọn:
                   </span>
                   <span className="text-sm font-bold text-slate-900 dark:text-white">
@@ -449,13 +449,13 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-base font-extrabold text-ocean-700 dark:text-ocean-300">
+                  <span className="text-base font-extrabold text-brand-700 dark:text-brand-300">
                     {formatPrice(selectedPlan.price)}
                   </span>
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="block text-[11px] text-ocean-600 hover:underline cursor-pointer"
+                    className="block text-[11px] text-brand-600 hover:underline cursor-pointer"
                   >
                     Đổi gói
                   </button>
@@ -481,7 +481,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                       className={`w-full pl-9 pr-3 py-2.5 rounded-xl border text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden transition-all ${
                         formErrors.name
                           ? 'border-rose-500 focus:ring-1 focus:ring-rose-500'
-                          : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-ocean-500'
+                          : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-brand-500'
                       }`}
                     />
                   </div>
@@ -508,7 +508,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         className={`w-full pl-9 pr-3 py-2.5 rounded-xl border text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden transition-all ${
                           formErrors.email
                             ? 'border-rose-500 focus:ring-1 focus:ring-rose-500'
-                            : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-ocean-500'
+                            : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-brand-500'
                         }`}
                       />
                     </div>
@@ -534,7 +534,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         className={`w-full pl-9 pr-3 py-2.5 rounded-xl border text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden transition-all ${
                           formErrors.phone
                             ? 'border-rose-500 focus:ring-1 focus:ring-rose-500'
-                            : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-ocean-500'
+                            : 'border-slate-300 dark:border-slate-700 focus:ring-2 focus:ring-brand-500'
                         }`}
                       />
                     </div>
@@ -553,7 +553,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     placeholder="Website cần phân tích hoặc yêu cầu hỗ trợ"
                     value={customerNote}
                     onChange={(e) => setCustomerNote(e.target.value)}
-                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-ocean-500"
+                    className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-brand-500"
                   />
                 </div>
               </div>
@@ -573,7 +573,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   type="button"
                   onClick={handleProceedToPayment}
                   disabled={isCreatingOrder}
-                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer disabled:opacity-50"
                 >
                   {isCreatingOrder ? (
                     <>
@@ -620,7 +620,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <div className="md:col-span-5 flex flex-col items-center justify-center p-3 rounded-2xl bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700">
                   <div className="text-center pb-2">
                     <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-center gap-1.5">
-                      <QrCode className="w-4 h-4 text-ocean-600" />
+                      <QrCode className="w-4 h-4 text-brand-600" />
                       Quét mã VietQR
                     </span>
                     <span className="text-[10px] text-slate-400">Mở app ngân hàng bất kỳ để quét</span>
@@ -635,7 +635,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   </div>
 
                   <div className="pt-2 text-center">
-                    <span className="text-[11px] font-extrabold text-ocean-700 dark:text-ocean-400">
+                    <span className="text-[11px] font-extrabold text-brand-700 dark:text-brand-400">
                       {formatPrice(currentOrder.amount)}
                     </span>
                   </div>
@@ -670,7 +670,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                         <button
                           type="button"
                           onClick={() => copyToClipboard(bankInfo.account_number, 'account')}
-                          className="p-1 rounded-md text-ocean-600 dark:text-ocean-400 hover:bg-ocean-50 dark:hover:bg-ocean-950/60 transition-colors cursor-pointer"
+                          className="p-1 rounded-md text-brand-600 dark:text-brand-400 hover:bg-brand-50 dark:hover:bg-brand-950/60 transition-colors cursor-pointer"
                           title="Sao chép số tài khoản"
                         >
                           {hasCopiedAccount ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
@@ -681,21 +681,21 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                     {/* Số tiền */}
                     <div className="flex items-center justify-between pb-2 border-b border-slate-100 dark:border-slate-800">
                       <span className="text-slate-500 dark:text-slate-400">Số tiền:</span>
-                      <span className="font-extrabold text-ocean-600 dark:text-ocean-400 text-sm">
+                      <span className="font-extrabold text-brand-600 dark:text-brand-400 text-sm">
                         {formatPrice(currentOrder.amount)}
                       </span>
                     </div>
 
                     {/* Nội dung chuyển khoản + Copy button (QUAN TRỌNG) */}
-                    <div className="p-2.5 rounded-lg bg-ocean-50 dark:bg-ocean-950/50 border border-ocean-200 dark:border-ocean-900/60 space-y-1">
+                    <div className="p-2.5 rounded-lg bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-900/60 space-y-1">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-ocean-800 dark:text-ocean-300 text-[11px]">
+                        <span className="font-bold text-brand-800 dark:text-brand-300 text-[11px]">
                           Nội dung chuyển khoản (bắt buộc):
                         </span>
                         <button
                           type="button"
                           onClick={() => copyToClipboard(currentOrder.order_code, 'content')}
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-ocean-600 hover:bg-ocean-700 text-white text-[10px] font-bold cursor-pointer transition-colors shadow-2xs"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-brand-600 hover:bg-brand-700 text-white text-[10px] font-bold cursor-pointer transition-colors shadow-2xs"
                         >
                           {hasCopiedContent ? (
                             <>
@@ -710,7 +710,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                           )}
                         </button>
                       </div>
-                      <div className="font-mono font-extrabold text-ocean-700 dark:text-ocean-200 text-base tracking-wider">
+                      <div className="font-mono font-extrabold text-brand-700 dark:text-brand-200 text-base tracking-wider">
                         {currentOrder.order_code}
                       </div>
                     </div>
@@ -750,7 +750,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                   <button
                     type="button"
                     onClick={onClose}
-                    className="px-4 py-2 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-sm cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-sm cursor-pointer"
                   >
                     Tôi sẽ chuyển khoản sau
                   </button>
@@ -787,7 +787,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 {currentOrder.expired_at && (
                   <div className="flex justify-between pt-1 border-t border-slate-200 dark:border-slate-700">
                     <span className="text-slate-500 dark:text-slate-400">Hiệu lực đến ngày:</span>
-                    <span className="font-bold text-ocean-600 dark:text-ocean-400">
+                    <span className="font-bold text-brand-600 dark:text-brand-400">
                       {new Date(currentOrder.expired_at).toLocaleDateString('vi-VN', {
                         year: 'numeric',
                         month: 'long',
@@ -806,7 +806,7 @@ export const SubscriptionModal: React.FC<SubscriptionModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="px-8 py-3 rounded-xl bg-gradient-to-r from-ocean-600 to-brand-600 hover:from-ocean-700 hover:to-brand-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer"
+                  className="px-8 py-3 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-extrabold text-sm shadow-md transition-all cursor-pointer"
                 >
                   Bắt đầu sử dụng ngay
                 </button>

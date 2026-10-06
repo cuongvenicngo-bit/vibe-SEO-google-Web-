@@ -96,11 +96,11 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   return (
     <>
-      <header className="app-header sticky top-0 z-40 w-full border-b backdrop-blur-xl transition-colors">
+      <header className="app-header sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-2">
           {/* Logo & Brand */}
           <a href="#" className="flex items-center gap-2.5 sm:gap-3 min-w-0" aria-label="PHÂN TÍCH WEB 360 - về đầu trang">
-            <div className="bg-aurora w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-lg shadow-brand-500/30 font-black text-sm tracking-tight shrink-0">
+            <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white shadow-sm font-black text-sm tracking-tight shrink-0">
               360°
             </div>
             <div className="min-w-0">
@@ -134,8 +134,8 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                       <span>Gói đang hoạt động, còn {subscriptionStatus.remaining_days} ngày</span>
                     </div>
                   ) : (
-                    <div className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-ocean-50 dark:bg-ocean-950/70 border border-ocean-300 dark:border-ocean-800 text-ocean-700 dark:text-ocean-300 text-xs font-bold">
-                      <Sparkles className="w-3.5 h-3.5 text-ocean-500" />
+                    <div className="hidden xl:inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-50 dark:bg-brand-950/70 border border-brand-300 dark:border-brand-800 text-brand-700 dark:text-brand-300 text-xs font-bold">
+                      <Sparkles className="w-3.5 h-3.5 text-brand-500" />
                       <span>Dùng thử • Còn {subscriptionStatus.remaining_hours}h</span>
                     </div>
                   )
@@ -171,7 +171,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               <button
                 type="button"
                 onClick={onOpenSubscriptionModal}
-                className="bg-aurora inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold whitespace-nowrap text-white rounded-xl shadow-lg shadow-brand-500/30 hover:brightness-110 hover:-translate-y-px transition-all cursor-pointer"
+                className="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 text-xs font-bold whitespace-nowrap text-white bg-accent-600 hover:bg-accent-700 rounded-xl shadow-sm transition-colors cursor-pointer"
                 title="Xem bảng giá và thanh toán tự động qua SePay"
               >
                 <CreditCard className="w-3.5 h-3.5" />
@@ -186,7 +186,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                 onClick={onOpenApiModal}
                 className={`hidden lg:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold rounded-xl transition-all cursor-pointer border ${
                   hasCustomApiKey
-                    ? 'bg-ocean-50 dark:bg-ocean-950/80 text-ocean-700 dark:text-ocean-300 border-ocean-300 dark:border-ocean-700 hover:bg-ocean-100'
+                    ? 'bg-brand-50 dark:bg-brand-950/80 text-brand-700 dark:text-brand-300 border-brand-300 dark:border-brand-700 hover:bg-brand-100'
                     : 'bg-white/70 dark:bg-slate-800/80 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 border-slate-200 dark:border-slate-700'
                 }`}
                 title={hasCustomApiKey ? 'Đã kết nối API riêng - Bấm để quản lý' : 'Cấu hình Gemini API Key riêng'}
@@ -262,7 +262,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
               {isMenuOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 top-11 w-64 p-1.5 rounded-2xl glass-panel bg-white dark:bg-slate-900 shadow-2xl animate-in z-50"
+                  className="absolute right-0 top-11 w-64 p-1.5 rounded-2xl surface-card shadow-2xl animate-in z-50"
                 >
                   {showTrialButton && (
                     <button type="button" role="menuitem" onClick={runFromMenu(onOpenTrialModal)} className={`sm:hidden ${menuItem}`}>
@@ -271,7 +271,7 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
                   )}
                   {onOpenApiModal && (
                     <button type="button" role="menuitem" onClick={runFromMenu(onOpenApiModal)} className={menuItem}>
-                      <Key className="w-4 h-4 text-ocean-500" /> Gemini API Key
+                      <Key className="w-4 h-4 text-brand-500" /> Gemini API Key
                       {hasCustomApiKey && <span className="ml-auto text-[10px] font-bold text-emerald-600">ĐÃ KẾT NỐI</span>}
                     </button>
                   )}

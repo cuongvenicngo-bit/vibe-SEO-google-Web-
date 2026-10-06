@@ -592,7 +592,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
               <button
                 type="button"
                 onClick={selectTechnicalPreset}
-                className="px-2.5 py-1 rounded-lg bg-sky-100 dark:bg-sky-950/80 text-sky-800 dark:text-sky-300 hover:bg-sky-200 font-semibold cursor-pointer transition-all"
+                className="px-2.5 py-1 rounded-lg bg-brand-100 dark:bg-brand-950/80 text-brand-800 dark:text-brand-300 hover:bg-brand-200 font-semibold cursor-pointer transition-all"
               >
                 🛠️ Cấu trúc & Kỹ thuật
               </button>
@@ -606,7 +606,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
               <button
                 type="button"
                 onClick={selectUserSiteOnlyPreset}
-                className="px-2.5 py-1 rounded-lg bg-purple-100 dark:bg-purple-950/80 text-purple-800 dark:text-purple-300 hover:bg-purple-200 font-semibold cursor-pointer transition-all"
+                className="px-2.5 py-1 rounded-lg bg-brand-100 dark:bg-brand-950/80 text-brand-800 dark:text-brand-300 hover:bg-brand-200 font-semibold cursor-pointer transition-all"
               >
                 🎯 Chỉ xem website của bạn
               </button>
@@ -837,7 +837,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
                   <button
                     type="button"
                     onClick={showOnlyUserSeries}
-                    className="text-purple-600 dark:text-purple-400 hover:underline font-semibold cursor-pointer"
+                    className="text-brand-600 dark:text-brand-400 hover:underline font-semibold cursor-pointer"
                   >
                     Chỉ bạn
                   </button>

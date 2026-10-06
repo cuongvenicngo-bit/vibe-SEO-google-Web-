@@ -43,7 +43,7 @@ export const Step8ExportAndActions: React.FC<Step8ExportAndActionsProps> = ({
   return (
     <div className="space-y-6">
       {/* Action Buttons Box */}
-      <div className="p-6 rounded-2xl bg-gradient-to-br from-brand-50/90 via-white to-sky-50/90 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-5">
+      <div className="p-6 rounded-2xl bg-gradient-to-br from-brand-50/90 via-white to-brand-50/90 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800 shadow-sm space-y-5">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h3 className="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">

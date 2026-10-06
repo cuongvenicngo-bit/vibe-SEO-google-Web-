@@ -21,11 +21,10 @@ import { Step7ImplementationRoadmap } from './components/steps/Step7Implementati
 import { Step8ExportAndActions } from './components/steps/Step8ExportAndActions';
 import { ToastNotification } from './components/ToastNotification';
 import { ErrorBoundary } from './components/ErrorBoundary';
-import { DarkSakuraPetals } from './components/DarkSakuraPetals';
-import { AmbientBackground } from './components/AmbientBackground';
 import { HeroIllustration } from './components/HeroIllustration';
 import { StepEmptyState } from './components/StepEmptyState';
-import { STEP_THEMES, stepStyle } from './components/stepThemes';
+import { TemplateNotice } from './components/TemplateNotice';
+import { STEP_ICONS } from './components/stepThemes';
 import { Sparkles, CheckCircle2, TrendingUp, Layers, Rocket } from 'lucide-react';
 
 const STEP_NAV_LABELS: Record<number, string> = {
@@ -333,8 +332,6 @@ export default function App() {
   return (
     <ErrorBoundary>
       <div className="app-shell min-h-screen flex flex-col text-slate-900 dark:text-slate-100 transition-colors">
-        <AmbientBackground />
-        <DarkSakuraPetals />
         {/* Application Header */}
         <AppHeader
           theme={theme}
@@ -358,7 +355,7 @@ export default function App() {
           {!report && !isLoading && (
             <section className="mb-8 sm:mb-10 grid lg:grid-cols-[1.05fr_0.95fr] gap-6 lg:gap-10 items-center animate-in">
               <div className="text-center lg:text-left space-y-5">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold glass-panel text-brand-700 dark:text-brand-200">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold surface-card text-slate-700 dark:text-slate-200">
                   <span className="relative flex w-2 h-2">
                     <span className="absolute inline-flex w-full h-full rounded-full bg-emerald-400 opacity-75 animate-ping" />
                     <span className="relative inline-flex w-2 h-2 rounded-full bg-emerald-500" />
@@ -368,7 +365,7 @@ export default function App() {
 
                 <h2 className="text-[2rem] leading-[1.12] sm:text-5xl lg:text-[3.4rem] font-black tracking-tight text-slate-900 dark:text-white">
                   Đánh giá toàn diện website{' '}
-                  <span className="text-aurora">từ nội dung đến chuyển đổi 10X</span>
+                  <span className="text-brand-600 dark:text-brand-400">từ nội dung đến chuyển đổi 10X</span>
                 </h2>
 
                 <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-xl mx-auto lg:mx-0 leading-relaxed">
@@ -378,7 +375,7 @@ export default function App() {
                 <div className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                   <a
                     href="#buoc-1"
-                    className="bg-aurora inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold text-white shadow-xl shadow-brand-500/30 hover:brightness-110 hover:-translate-y-0.5 transition-all"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-white bg-accent-600 hover:bg-accent-700 shadow-md shadow-accent-600/25 transition-colors"
                   >
                     <Rocket className="w-4 h-4" />
                     Bắt đầu phân tích ngay
@@ -386,9 +383,9 @@ export default function App() {
                   <button
                     type="button"
                     onClick={() => setIsSubscriptionModalOpen(true)}
-                    className="glass-panel inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-bold text-slate-800 dark:text-white hover:-translate-y-0.5 transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl text-sm font-bold text-brand-700 dark:text-brand-300 bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-800 hover:bg-brand-50 dark:hover:bg-slate-800 transition-colors cursor-pointer"
                   >
-                    <Sparkles className="w-4 h-4 text-brand-500" />
+                    <Sparkles className="w-4 h-4" />
                     Xem bảng giá
                   </button>
                 </div>
@@ -396,12 +393,12 @@ export default function App() {
                 {/* Key numbers */}
                 <dl className="grid grid-cols-4 gap-2 sm:gap-3 max-w-xl mx-auto lg:mx-0">
                   {[
-                    { value: '8', label: 'bước', color: 'text-ocean-600 dark:text-ocean-300' },
+                    { value: '8', label: 'bước', color: 'text-brand-600 dark:text-brand-300' },
                     { value: '35', label: 'tiêu chí', color: 'text-brand-600 dark:text-brand-300' },
-                    { value: '5', label: 'đối thủ', color: 'text-pink-600 dark:text-pink-300' },
-                    { value: '90', label: 'ngày', color: 'text-amber-600 dark:text-amber-300' },
+                    { value: '5', label: 'đối thủ', color: 'text-brand-600 dark:text-brand-300' },
+                    { value: '90', label: 'ngày', color: 'text-brand-600 dark:text-brand-300' },
                   ].map((stat) => (
-                    <div key={stat.label} className="glass-panel rounded-2xl py-3 px-1 text-center">
+                    <div key={stat.label} className="surface-card rounded-xl py-3 px-1 text-center">
                       <dt className="sr-only">{stat.label}</dt>
                       <dd className={`text-xl sm:text-2xl font-black ${stat.color}`}>{stat.value}</dd>
                       <dd className="text-[11px] sm:text-xs font-medium text-slate-500 dark:text-slate-400">{stat.label}</dd>
@@ -417,12 +414,12 @@ export default function App() {
               {/* 3 Key Highlights */}
               <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm text-left">
                 {[
-                  { icon: CheckCircle2, title: 'Không bịa đặt số liệu', desc: 'Quan sát thực tế & đối chiếu công khai', tint: 'from-emerald-400 to-teal-500' },
-                  { icon: TrendingUp, title: 'Tìm 5 đối thủ tự nhiên', desc: 'Lọc bỏ mạng xã hội & sàn TMĐT', tint: 'from-ocean-400 to-brand-500' },
-                  { icon: Layers, title: 'Lộ trình 90 ngày 10X', desc: 'Kịch bản video, banner & biểu mẫu', tint: 'from-amber-400 to-pink-500' },
-                ].map(({ icon: Icon, title, desc, tint }) => (
-                  <div key={title} className="glass-panel p-4 rounded-2xl flex items-center gap-3 hover:-translate-y-0.5 transition-transform">
-                    <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${tint} text-white flex items-center justify-center shrink-0 shadow-lg`}>
+                  { icon: CheckCircle2, title: 'Không bịa đặt số liệu', desc: 'Quan sát thực tế & đối chiếu công khai' },
+                  { icon: TrendingUp, title: 'Tìm 5 đối thủ tự nhiên', desc: 'Lọc bỏ mạng xã hội & sàn TMĐT' },
+                  { icon: Layers, title: 'Lộ trình 90 ngày 10X', desc: 'Kịch bản video, banner & biểu mẫu' },
+                ].map(({ icon: Icon, title, desc }) => (
+                  <div key={title} className="surface-card p-4 rounded-xl flex items-center gap-3">
+                    <div className="w-11 h-11 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/60 dark:text-brand-300 flex items-center justify-center shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -438,13 +435,13 @@ export default function App() {
           {/* Quick navigation across the 8 steps */}
           <nav aria-label="Các bước phân tích" className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0 overflow-x-auto">
             <ol className="flex gap-2 min-w-max pb-1">
-              {Object.entries(STEP_THEMES).map(([num, { icon: Icon }]) => (
-                <li key={num} style={stepStyle(Number(num))}>
+              {Object.entries(STEP_ICONS).map(([num, Icon]) => (
+                <li key={num}>
                   <a
                     href={`#buoc-${num}`}
-                    className="glass-panel inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:-translate-y-0.5 transition-transform"
+                    className="surface-card inline-flex items-center gap-2 pl-1.5 pr-3 py-1.5 rounded-full text-xs font-semibold text-slate-700 dark:text-slate-200 hover:border-brand-300 hover:text-brand-700 dark:hover:text-brand-300 transition-colors"
                   >
-                    <span className="step-badge w-6 h-6 rounded-full text-white flex items-center justify-center">
+                    <span className="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center">
                       <Icon className="w-3.5 h-3.5" />
                     </span>
                     {STEP_NAV_LABELS[Number(num)]}
@@ -487,7 +484,9 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step2CompetitorProfiles
+                <>
+                  {report.templatedSteps?.includes(2) && <TemplateNotice />}
+                  <Step2CompetitorProfiles
                   competitorProfiles={report.competitorProfiles || []}
                   competitorsFound={report.competitorsFound || []}
                   actionableFindings={report.actionableFindings || []}
@@ -495,6 +494,7 @@ export default function App() {
                   isRegenerating={isRegeneratingCompetitors}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={2} message="Vui lòng nhập website ở Bước 1 và bấm “Phân tích website” để AI xây dựng hồ sơ đối thủ." />
               )}
@@ -509,7 +509,9 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step3CriteriaComparison
+                <>
+                  {report.templatedSteps?.includes(3) && <TemplateNotice />}
+                  <Step3CriteriaComparison
                   data={report.criteriaComparison}
                   competitors={report.competitorProfiles || []}
                   userWebsiteUrl={report.userWebsiteUrl}
@@ -517,6 +519,7 @@ export default function App() {
                   isRegenerating={isRegeneratingCriteria}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={3} message="Bảng ma trận tiêu chí sẽ xuất hiện sau khi AI quét và xác thực dữ liệu các website." />
               )}
@@ -531,13 +534,16 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step4OpportunityGaps
+                <>
+                  {report.templatedSteps?.includes(4) && <TemplateNotice />}
+                  <Step4OpportunityGaps
                   opportunities={report.opportunityGaps10X || report.opportunityGaps || []}
                   onRegenerate={handleRegenerateOpportunities}
                   isRegenerating={isRegeneratingOpportunities}
                   onAddToRoadmap={handleAddToRoadmap}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={4} message="Khoảng trống cơ hội sẽ được tự động tổng hợp sau khi hoàn tất so sánh tiêu chí." />
               )}
@@ -552,13 +558,16 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step5ContentStrategy
+                <>
+                  {report.templatedSteps?.includes(5) && <TemplateNotice />}
+                  <Step5ContentStrategy
                   contentStrategy={report.contentStrategy}
                   report10X={report}
                   websiteInput={inputData}
                   onUpdateStrategy={(updated) => setReport({ ...report, contentStrategy: updated })}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={5} message="Chiến lược nội dung và On-page SEO sẽ hiển thị tại đây sau khi phân tích." />
               )}
@@ -573,13 +582,16 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step6ProductionPlan
+                <>
+                  {report.templatedSteps?.includes(6) && <TemplateNotice />}
+                  <Step6ProductionPlan
                   productionPlan={report.productionPlan}
                   websiteInput={inputData}
                   report10X={report}
                   onUpdatePlan={(updated) => setReport({ ...report, productionPlan: updated })}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={6} message="Kế hoạch sản xuất bàn giao cho đội ngũ thực thi sẽ hiển thị sau khi hoàn tất phân tích." />
               )}
@@ -594,12 +606,15 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step7ImplementationRoadmap
+                <>
+                  {report.templatedSteps?.includes(7) && <TemplateNotice />}
+                  <Step7ImplementationRoadmap
                   roadmap={report.roadmap}
                   tasks10X={report.roadmapTasks10X}
                   onUpdateTaskStatus={handleUpdateTaskStatus}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={7} message="Lộ trình triển khai 3 giai đoạn sẽ xuất hiện sau khi phân tích hoàn tất." />
               )}
@@ -614,12 +629,15 @@ export default function App() {
               defaultExpanded={!!report}
             >
               {report ? (
-                <Step8ExportAndActions
+                <>
+                  {report.templatedSteps?.includes(8) && <TemplateNotice />}
+                  <Step8ExportAndActions
                   report={report}
                   onRegenerateAll={handleStartAnalysis}
                   onClearData={handleClearAllData}
                   onShowToast={showToast}
                 />
+              </>
               ) : (
                 <StepEmptyState stepNumber={8} message="Báo cáo tổng kết và tính năng xuất file TXT/PDF sẽ khả dụng sau khi hoàn thành các bước trên." />
               )}
@@ -628,7 +646,7 @@ export default function App() {
         </main>
 
         <footer className="relative z-[1] border-t border-slate-200/70 dark:border-slate-800/70 py-6 text-center text-xs text-slate-500 dark:text-slate-400">
-          <span className="font-bold text-aurora">PHÂN TÍCH WEB 360</span> · Đánh giá website từ nội dung đến chuyển đổi · Thanh toán tự động SePay
+          <span className="font-bold text-brand-600 dark:text-brand-400">PHÂN TÍCH WEB 360</span> · Đánh giá website từ nội dung đến chuyển đổi · Thanh toán tự động SePay
         </footer>
 
         {/* Gemini API Key Configuration Modal */}

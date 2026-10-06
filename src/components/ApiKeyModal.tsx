@@ -116,9 +116,9 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
-      <div className="bg-white dark:bg-slate-900 border border-ocean-200 dark:border-ocean-900/60 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden space-y-0 text-slate-800 dark:text-slate-100">
+      <div className="bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-900/60 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden space-y-0 text-slate-800 dark:text-slate-100">
         {/* Header */}
-        <div className="p-5 bg-gradient-to-r from-ocean-600 via-brand-600 to-ocean-700 text-white flex items-center justify-between">
+        <div className="p-5 bg-gradient-to-r from-brand-600 via-brand-600 to-brand-700 text-white flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center shadow-inner">
               <Key className="w-5 h-5 text-white" />
@@ -127,7 +127,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
               <h3 className="text-base font-bold flex items-center gap-2">
                 Cấu hình Gemini API Key
               </h3>
-              <p className="text-xs text-ocean-100">
+              <p className="text-xs text-brand-100">
                 Tự do kết nối API Key riêng để phân tích không giới hạn
               </p>
             </div>
@@ -153,8 +153,8 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 Đã kết nối API riêng
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-ocean-50 text-ocean-700 dark:bg-ocean-950/60 dark:text-ocean-300 border border-ocean-200 dark:border-ocean-800">
-                <ShieldCheck className="w-3.5 h-3.5 text-ocean-500" />
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium bg-brand-50 text-brand-700 dark:bg-brand-950/60 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
+                <ShieldCheck className="w-3.5 h-3.5 text-brand-500" />
                 Đang dùng API mặc định
               </span>
             )}
@@ -162,7 +162,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
 
           {/* Description Guide */}
           <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
-            Khi gọi AI trong app, hệ thống sẽ <strong className="text-ocean-600 dark:text-ocean-400 font-semibold">ưu tiên dùng API Key riêng</strong> bạn đã lưu trong trình duyệt. Nếu chưa nhập, app sẽ tự động dùng API Key mặc định trên server.
+            Khi gọi AI trong app, hệ thống sẽ <strong className="text-brand-600 dark:text-brand-400 font-semibold">ưu tiên dùng API Key riêng</strong> bạn đã lưu trong trình duyệt. Nếu chưa nhập, app sẽ tự động dùng API Key mặc định trên server.
           </p>
 
           {/* API Key Input */}
@@ -179,7 +179,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                   setApiKey(e.target.value);
                   setTestResult(null);
                 }}
-                className="w-full pl-3.5 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 font-mono text-xs focus:ring-2 focus:ring-ocean-500 focus:border-ocean-500 outline-hidden transition-all"
+                className="w-full pl-3.5 pr-10 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white placeholder:text-slate-400 font-mono text-xs focus:ring-2 focus:ring-brand-500 focus:border-brand-500 outline-hidden transition-all"
               />
               <button
                 type="button"
@@ -218,16 +218,16 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
               type="button"
               onClick={handleTest}
               disabled={isTesting || !apiKey.trim()}
-              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-ocean-300 dark:border-ocean-800 bg-ocean-50/70 hover:bg-ocean-100 dark:bg-ocean-950/50 dark:hover:bg-ocean-900/60 text-ocean-700 dark:text-ocean-300 font-bold transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl border border-brand-300 dark:border-brand-800 bg-brand-50/70 hover:bg-brand-100 dark:bg-brand-950/50 dark:hover:bg-brand-900/60 text-brand-700 dark:text-brand-300 font-bold transition-colors cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isTesting ? (
                 <>
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-ocean-600" />
+                  <Loader2 className="w-3.5 h-3.5 animate-spin text-brand-600" />
                   <span>Đang test...</span>
                 </>
               ) : (
                 <>
-                  <Sparkles className="w-3.5 h-3.5 text-ocean-600" />
+                  <Sparkles className="w-3.5 h-3.5 text-brand-600" />
                   <span>Test thử API</span>
                 </>
               )}
@@ -271,7 +271,7 @@ export const ApiKeyModal: React.FC<ApiKeyModalProps> = ({
                 type="button"
                 onClick={handleSave}
                 disabled={!apiKey.trim()}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold transition-all shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold transition-all shadow-sm cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save className="w-3.5 h-3.5" />
                 <span>Lưu API</span>

@@ -316,9 +316,9 @@ ${!p.isUserSite ? `- Điều có thể học hỏi: ${p.learningsForUser?.join('
               </ul>
             </div>
 
-            <div className="p-4 rounded-xl bg-sky-50/60 dark:bg-sky-950/30 border border-sky-200/70 dark:border-sky-850">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-sky-900 dark:text-sky-300 mb-2 flex items-center gap-1.5">
-                <Swords className="w-4 h-4 text-sky-600 dark:text-sky-400" />
+            <div className="p-4 rounded-xl bg-brand-50/60 dark:bg-brand-950/30 border border-brand-200/70 dark:border-brand-850">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-brand-900 dark:text-brand-300 mb-2 flex items-center gap-1.5">
+                <Swords className="w-4 h-4 text-brand-600 dark:text-brand-400" />
                 Cách website của bạn nên cạnh tranh
               </h4>
               <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">

@@ -100,14 +100,14 @@ export const TrialModal: React.FC<TrialModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs animate-in fade-in duration-200">
       <div className="bg-white dark:bg-slate-900 border border-brand-200 dark:border-brand-900/60 rounded-2xl max-w-md w-full shadow-2xl overflow-hidden text-slate-800 dark:text-slate-100">
         {/* Header */}
-        <div className="p-5 bg-gradient-to-r from-ocean-600 via-brand-600 to-sky-600 text-white flex items-center justify-between">
+        <div className="p-5 bg-gradient-to-r from-brand-600 via-brand-600 to-brand-600 text-white flex items-center justify-between">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-white/15 flex items-center justify-center shadow-inner">
               <Sparkles className="w-5 h-5 text-white" />
             </div>
             <div>
               <h3 className="text-base font-bold">Đăng ký Dùng thử Miễn phí</h3>
-              <p className="text-xs text-ocean-100">Trải nghiệm toàn diện tính năng PHÂN TÍCH WEB 360</p>
+              <p className="text-xs text-brand-100">Trải nghiệm toàn diện tính năng PHÂN TÍCH WEB 360</p>
             </div>
           </div>
           <button
@@ -164,7 +164,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-full py-2.5 rounded-xl bg-ocean-600 hover:bg-ocean-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
+                  className="w-full py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md transition-colors cursor-pointer"
                 >
                   Bắt đầu sử dụng
                 </button>
@@ -173,8 +173,8 @@ export const TrialModal: React.FC<TrialModalProps> = ({
           ) : (
             /* Registration Form */
             <form onSubmit={handleSubmit} className="space-y-3.5">
-              <div className="p-3 rounded-xl bg-ocean-50 dark:bg-ocean-950/40 border border-ocean-200 dark:border-ocean-900/60 text-[11px] text-ocean-900 dark:text-ocean-200 flex items-start gap-2">
-                <ShieldCheck className="w-4 h-4 text-ocean-600 dark:text-ocean-400 shrink-0 mt-0.5" />
+              <div className="p-3 rounded-xl bg-brand-50 dark:bg-brand-950/40 border border-brand-200 dark:border-brand-900/60 text-[11px] text-brand-900 dark:text-brand-200 flex items-start gap-2">
+                <ShieldCheck className="w-4 h-4 text-brand-600 dark:text-brand-400 shrink-0 mt-0.5" />
                 <span>
                   Đăng ký dùng thử miễn phí trong <strong>24 giờ</strong>. Không cần thẻ tín dụng, kích hoạt tức thì.
                 </span>
@@ -201,7 +201,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                       setCustomerName(e.target.value);
                       if (formErrors.name) setFormErrors({ ...formErrors, name: '' });
                     }}
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-ocean-500"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-brand-500"
                   />
                 </div>
                 {formErrors.name && (
@@ -223,7 +223,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                       setCustomerEmail(e.target.value);
                       if (formErrors.email) setFormErrors({ ...formErrors, email: '' });
                     }}
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-ocean-500"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-brand-500"
                   />
                 </div>
                 {formErrors.email && (
@@ -245,7 +245,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                       setCustomerPhone(e.target.value);
                       if (formErrors.phone) setFormErrors({ ...formErrors, phone: '' });
                     }}
-                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-ocean-500"
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-brand-500"
                   />
                 </div>
                 {formErrors.phone && (
@@ -262,7 +262,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                   placeholder="Lĩnh vực kinh doanh hoặc website của bạn"
                   value={customerNote}
                   onChange={(e) => setCustomerNote(e.target.value)}
-                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-ocean-500"
+                  className="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-white outline-hidden focus:ring-2 focus:ring-brand-500"
                 />
               </div>
 
@@ -270,7 +270,7 @@ export const TrialModal: React.FC<TrialModalProps> = ({
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full py-2.5 rounded-xl bg-gradient-to-r from-ocean-600 to-brand-600 hover:from-ocean-700 hover:to-brand-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
+                  className="w-full py-2.5 rounded-xl bg-accent-600 hover:bg-accent-700 text-white font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                 >
                   {isLoading ? (
                     <>

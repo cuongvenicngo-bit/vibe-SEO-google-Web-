@@ -274,6 +274,8 @@ export interface VerificationEvent {
 
 export interface AnalysisReport10X {
   version: string;
+  /** Steps filled with generic industry templates rather than AI analysis of this site. */
+  templatedSteps?: number[];
   analyzedAt: string;
   userWebsiteUrl: string;
   businessName: string;

@@ -112,7 +112,7 @@ export const Step3CriteriaComparison: React.FC<Step3CriteriaComparisonProps> = (
   return (
     <div className="step-3-container space-y-6">
       {/* Top Rankings Summary Bar */}
-      <div className="p-4 rounded-xl bg-gradient-to-r from-brand-50/80 via-white to-sky-50/80 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800">
+      <div className="p-4 rounded-xl bg-gradient-to-r from-brand-50/80 via-white to-brand-50/80 dark:from-slate-850 dark:via-slate-900 dark:to-slate-850 border border-slate-200/90 dark:border-slate-800">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
             <Trophy className="w-5 h-5 text-amber-500 shrink-0" />

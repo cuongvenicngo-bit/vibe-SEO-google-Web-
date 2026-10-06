@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StepStatus } from '../types';
 import { CheckCircle2, Clock, AlertTriangle, AlertCircle, CircleDot, ChevronDown } from 'lucide-react';
-import { STEP_THEMES, stepStyle } from './stepThemes';
+import { STEP_ICONS } from './stepThemes';
 
 interface StepWrapperProps {
   stepNumber: number;
@@ -23,7 +23,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
   defaultExpanded = true,
 }) => {
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
-  const Icon = (STEP_THEMES[stepNumber] || STEP_THEMES[1]).icon;
+  const Icon = STEP_ICONS[stepNumber] || STEP_ICONS[1];
 
   const getStatusBadge = () => {
     switch (status) {
@@ -69,8 +69,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
   return (
     <section
       id={`buoc-${stepNumber}`}
-      style={stepStyle(stepNumber)}
-      className="step-card glass-panel relative rounded-2xl transition-all mb-6 overflow-hidden scroll-mt-20"
+      className="step-card surface-card relative rounded-2xl transition-all mb-6 overflow-hidden scroll-mt-20"
     >
       {/* Step Header */}
       <div
@@ -78,7 +77,7 @@ export const StepWrapper: React.FC<StepWrapperProps> = ({
         onClick={() => setIsExpanded(!isExpanded)}
       >
         <div className="flex items-start sm:items-center gap-3.5 min-w-0">
-          <div className="step-badge w-11 h-11 rounded-xl text-white flex flex-col items-center justify-center shrink-0 leading-none">
+          <div className="w-11 h-11 rounded-xl bg-brand-600 text-white shadow-sm shadow-brand-600/30 flex flex-col items-center justify-center shrink-0 leading-none">
             <Icon className="w-4 h-4 mb-0.5 opacity-90" />
             <span className="text-[11px] font-black">{stepNumber}</span>
           </div>

@@ -192,7 +192,64 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-let isSearchToolQuotaExceeded = false;
+// Turns a Gemini SDK error into a message the customer can act on, plus an HTTP status.
+function describeGeminiError(err: any): { status: number; message: string } {
+  const raw = String(err?.message || err || '');
+  if (/API key not valid|API_KEY_INVALID|invalid api key|api key expired/i.test(raw)) {
+    return { status: 400, message: 'Khóa API Gemini không hợp lệ hoặc đã hết hạn. Bấm nút API để nhập lại khóa từ Google AI Studio.' };
+  }
+  if (/RESOURCE_EXHAUSTED|quota|rate limit|429/i.test(raw)) {
+    return { status: 429, message: 'Khóa API Gemini đã hết hạn mức sử dụng (quota). Vui lòng đợi vài phút hoặc dùng khóa API khác / nâng cấp gói Google AI.' };
+  }
+  if (/PERMISSION_DENIED|referer|referrer|403|blocked/i.test(raw)) {
+    return {
+      status: 403,
+      message:
+        'Khóa API Gemini bị từ chối quyền truy cập. Nếu bạn đã giới hạn khóa theo website (HTTP referrer) trong Google Cloud, hãy bỏ giới hạn đó vì app gọi AI từ máy chủ.',
+    };
+  }
+  if (/NOT_FOUND|404|is not supported/i.test(raw)) {
+    return { status: 502, message: `Mô hình AI ${GEMINI_MODEL} hiện không khả dụng với khóa API này. Chi tiết: ${raw.slice(0, 200)}` };
+  }
+  return { status: 502, message: `Không gọi được AI Gemini: ${raw.slice(0, 240) || 'lỗi không xác định'}` };
+}
+
+const GEMINI_MODEL = 'gemini-3.8-flash';
+
+/**
+ * Keeps only competitor websites that actually respond. AI models (especially without live
+ * search) sometimes invent plausible-looking domains; any HTTP answer, even 403, proves the
+ * site exists, while DNS/connection failures mean it does not.
+ */
+async function keepReachableCompetitors(competitors: any[], userHostname: string): Promise<any[]> {
+  const userRoot = userHostname.replace(/^www\./, '');
+  const candidates = (Array.isArray(competitors) ? competitors : []).filter((c) => {
+    try {
+      const host = new URL(c.url).hostname.replace(/^www\./, '');
+      return host !== userRoot;
+    } catch {
+      return false;
+    }
+  });
+  const checks = await Promise.all(
+    candidates.map(async (c) => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 6000);
+      try {
+        await fetch(c.url, { method: 'GET', redirect: 'follow', signal: controller.signal, headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Web360Bot/1.0)' } });
+        return true;
+      } catch {
+        return false;
+      } finally {
+        clearTimeout(timer);
+      }
+    })
+  );
+  const kept = candidates.filter((_, i) => checks[i]);
+  const dropped = candidates.length - kept.length;
+  if (dropped > 0) console.warn(`Dropped ${dropped} unreachable competitor URL(s) suggested by AI`);
+  return kept;
+}
 
 // Synthesize 10X Report dynamically for ANY custom website
 function buildComprehensive10XReport(
@@ -226,52 +283,8 @@ function buildComprehensive10XReport(
           `tư vấn sản phẩm ${industry.toLowerCase()}`,
         ];
 
-  // Competitors list
-  let competitorsFound = aiData.competitorsFound || [];
-  if (competitorsFound.length === 0) {
-    competitorsFound = [
-      {
-        name: `Đối thủ A ngành ${industry}`,
-        url: `https://doithua-${hostname.replace(/\./g, '')}.com`,
-        queryFound: commercialKeywords[0] || 'sản phẩm chính hãng',
-        reason: 'Xuất hiện trong mẫu kết quả tìm kiếm tự nhiên cùng ngành',
-        relevance: 'cao',
-        source: 'Kết quả tìm kiếm tự nhiên Google',
-      },
-      {
-        name: `Đối thủ B chuyên môn`,
-        url: `https://doithub-${hostname.replace(/\./g, '')}.vn`,
-        queryFound: commercialKeywords[1] || 'báo giá sản phẩm',
-        reason: 'Có thế mạnh về danh mục sản phẩm và chính sách bảo hành',
-        relevance: 'cao',
-        source: 'Kết quả tìm kiếm tự nhiên Google',
-      },
-      {
-        name: `Đại lý phân phối C`,
-        url: `https://dailyc-${hostname.replace(/\./g, '')}.com.vn`,
-        queryFound: 'đại lý phân phối chính hãng',
-        reason: 'Chiếm lĩnh từ khóa thương mại và báo giá trực tuyến',
-        relevance: 'trung bình',
-        source: 'Kết quả tìm kiếm tự nhiên Google',
-      },
-      {
-        name: `Công ty kỹ thuật D`,
-        url: `https://kythuatd-${hostname.replace(/\./g, '')}.vn`,
-        queryFound: 'hướng dẫn kỹ thuật và lắp đặt',
-        reason: 'Có bài viết kiến thức chuyên sâu và video hướng dẫn',
-        relevance: 'trung bình',
-        source: 'Kết quả tìm kiếm tự nhiên Google',
-      },
-      {
-        name: `Hệ thống giải pháp E`,
-        url: `https://giaiphap-e-${hostname.replace(/\./g, '')}.com`,
-        queryFound: 'giải pháp trọn gói cho doanh nghiệp',
-        reason: 'Cung cấp cấu hình đa dạng và dịch vụ sau bán hàng',
-        relevance: 'trung bình',
-        source: 'Kết quả tìm kiếm tự nhiên Google',
-      },
-    ];
-  }
+  // Competitors list (only real, reachable sites returned by the AI - never invented placeholders)
+  const competitorsFound = Array.isArray(aiData.competitorsFound) ? aiData.competitorsFound : [];
 
   // 6 Profiles
   let competitorProfiles = aiData.competitorProfiles || [];
@@ -840,8 +853,18 @@ function buildComprehensive10XReport(
     },
   ];
 
+  // Steps whose content the AI did not produce and that therefore show generic, industry-level
+  // guidance; the UI labels them so customers do not mistake them for measured results.
+  const templatedSteps = [3];
+  if (!aiData.actionableFindings) templatedSteps.push(2);
+  if (!aiData.opportunityGaps10X) templatedSteps.push(4);
+  if (!aiData.personas10X) templatedSteps.push(5);
+  if (!aiData.bannerProduction && !aiData.videoScripts10X) templatedSteps.push(6);
+  if (!aiData.roadmapTasks10X) templatedSteps.push(7);
+
   return {
     version: 'web360_v2_10x',
+    templatedSteps: templatedSteps.sort(),
     analyzedAt: new Date().toISOString(),
     userWebsiteUrl: normalizedUrl,
     businessName,
@@ -1655,7 +1678,7 @@ app.post('/api/test-gemini', async (req, res) => {
 
     const testAi = getGeminiClient(userApiKey.trim());
     const response = await testAi.models.generateContent({
-      model: 'gemini-3.8-flash',
+      model: GEMINI_MODEL,
       contents: 'Ping test. Vui lòng phản hồi ngắn gọn "OK".',
     });
 
@@ -1671,7 +1694,7 @@ app.post('/api/test-gemini', async (req, res) => {
     console.error('Test Gemini API error:', err?.message || err);
     return res.status(400).json({
       success: false,
-      message: 'API Key không hợp lệ hoặc đã hết hạn, vui lòng kiểm tra lại.',
+      message: describeGeminiError(err).message,
       error: err?.message,
     });
   }
@@ -1863,60 +1886,55 @@ HÃY TRẢ VỀ DUY NHẤT CHUỖI JSON HỢP LỆ VỚI CÁC TRƯỜNG SAU (KH�
 }
 `;
 
-    let aiData: any = {};
-
-    try {
-      let responseText = '';
-      if (!isSearchToolQuotaExceeded) {
-        try {
-          const response = await ai.models.generateContent({
-            model: 'gemini-3.8-flash',
-            contents: prompt,
-            config: {
-              tools: [{ googleSearch: {} }],
-              temperature: 0.2,
-            },
-          });
-          responseText = response.text || '';
-        } catch (searchErr: any) {
-          console.warn('Google Search quota reached, switching to direct AI generation:', searchErr.message);
-          isSearchToolQuotaExceeded = true;
-        }
-      }
-
-      if (!responseText) {
-        const fallback = await ai.models.generateContent({
-          model: 'gemini-3.8-flash',
-          contents: prompt,
-          config: {
-            temperature: 0.2,
-          },
-        });
-        responseText = fallback.text || '';
-      }
-
-      if (responseText) {
-        aiData = cleanJsonOutput(responseText);
-      }
-    } catch (aiErr: any) {
-      console.warn('AI call encountered warning, activating resilient 10X synthesizer:', aiErr.message);
+    if (!customApiKey?.trim() && !process.env.GEMINI_API_KEY) {
+      return res.status(400).json({
+        error: 'Chưa có khóa API Gemini. Bấm nút "API" trên thanh đầu trang để nhập khóa từ Google AI Studio (aistudio.google.com/apikey).',
+      });
     }
 
-    // Build the complete 10X Report
+    // 1st attempt: live Google Search grounding so competitors are real sites found today.
+    // 2nd attempt (only for non-account errors): plain generation with strict JSON output.
+    let aiData: any = null;
+    let lastError: any = null;
+    const attempts: Array<{ label: string; config: any }> = [
+      { label: 'search', config: { tools: [{ googleSearch: {} }], temperature: 0.2 } },
+      { label: 'json', config: { responseMimeType: 'application/json', temperature: 0.2 } },
+    ];
+    for (const attempt of attempts) {
+      try {
+        const response = await ai.models.generateContent({ model: GEMINI_MODEL, contents: prompt, config: attempt.config });
+        const parsed = cleanJsonOutput(response.text || '');
+        if (parsed && typeof parsed === 'object' && parsed.businessSummary) {
+          aiData = parsed;
+          break;
+        }
+        lastError = new Error('AI trả về dữ liệu không đúng cấu trúc báo cáo.');
+      } catch (err: any) {
+        lastError = err;
+        console.warn(`Gemini ${attempt.label} attempt failed:`, err?.message);
+        // Key / quota / permission problems will not be fixed by retrying.
+        if (describeGeminiError(err).status !== 502) break;
+      }
+    }
+
+    if (!aiData) {
+      const { status, message } = describeGeminiError(lastError);
+      return res.status(status).json({ error: message });
+    }
+
+    aiData.competitorsFound = await keepReachableCompetitors(aiData.competitorsFound, hostname);
+    if (Array.isArray(aiData.competitorProfiles)) {
+      const validUrls = new Set(aiData.competitorsFound.map((c: any) => c.url));
+      aiData.competitorProfiles = aiData.competitorProfiles.filter((p: any) => p.isUserSite || validUrls.has(p.url));
+    }
+
     const full10XReport = buildComprehensive10XReport(normalizedUrl, hostname, aiData, webMeta);
     return res.json(full10XReport);
   } catch (error: any) {
     console.error('Error in /api/analyze-website:', error);
-    // Never fail with a raw 500 error! Generate an intelligent domain-level 10X report!
-    try {
-      const parsedUrl = new URL(req.body.url.startsWith('http') ? req.body.url : `https://${req.body.url}`);
-      const fallbackReport = buildComprehensive10XReport(parsedUrl.href, parsedUrl.hostname, {}, { title: '', metaDesc: '' });
-      return res.json(fallbackReport);
-    } catch {
-      return res.status(400).json({
-        error: error.message || 'Vui lòng kiểm tra lại địa chỉ website.',
-      });
-    }
+    return res.status(400).json({
+      error: error.message || 'Vui lòng kiểm tra lại địa chỉ website.',
+    });
   }
 });
 
@@ -1958,13 +1976,15 @@ Trả về JSON hợp lệ cho phân đoạn "${section}".
     let responseText = '';
     try {
       const response = await ai.models.generateContent({
-        model: 'gemini-3.8-flash',
+        model: GEMINI_MODEL,
         contents: prompt,
-        config: { temperature: 0.3 },
+        config: { temperature: 0.3, responseMimeType: 'application/json' },
       });
       responseText = response.text || '';
     } catch (err: any) {
-      console.warn('Regenerate section AI fallback:', err.message);
+      console.warn('Regenerate section AI error:', err.message);
+      const { status, message } = describeGeminiError(err);
+      return res.status(status).json({ error: message });
     }
 
     const parsed = cleanJsonOutput(responseText || '{}');
