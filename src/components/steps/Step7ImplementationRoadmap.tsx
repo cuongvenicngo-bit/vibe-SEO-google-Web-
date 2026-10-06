@@ -224,7 +224,7 @@ export const Step7ImplementationRoadmap: React.FC<Step7ImplementationRoadmapProp
                   </span>
                 </div>
 
-                <h4 className={`text-sm font-bold ${isDone ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-900 dark:text-white'}`}>
+                <h4 className={`text-sm font-bold ${isDone ? 'line-through text-slate-400 dark:text-slate-400' : 'text-slate-900 dark:text-white'}`}>
                   {t.taskName}
                 </h4>
 

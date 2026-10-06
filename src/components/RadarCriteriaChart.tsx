@@ -681,7 +681,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
                     className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all cursor-pointer font-medium text-xs select-none ${
                       isSelected
                         ? 'bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-650 text-slate-900 dark:text-white shadow-xs'
-                        : 'bg-slate-100/70 dark:bg-slate-800/40 border-dashed border-slate-300 dark:border-slate-700 text-slate-400 dark:text-slate-500 opacity-60 hover:opacity-90'
+                        : 'bg-slate-100/70 dark:bg-slate-800/40 border-dashed border-slate-300 dark:border-slate-700 text-slate-400 dark:text-slate-400 opacity-60 hover:opacity-90'
                     }`}
                   >
                     <span
@@ -1049,7 +1049,7 @@ export const RadarCriteriaChart: React.FC<RadarCriteriaChartProps> = ({
             )}
 
             {/* Quick Note on Verification Principle */}
-            <div className="text-[11px] text-slate-400 dark:text-slate-500 italic flex items-center gap-1.5 pt-1">
+            <div className="text-[11px] text-slate-400 dark:text-slate-400 italic flex items-center gap-1.5 pt-1">
               <Sparkles className="w-3.5 h-3.5 text-brand-400 shrink-0" />
               <span>Điểm số phản ánh trực tiếp bằng chứng từ URL kiểm tra, tự động tái tính toán theo bộ lọc.</span>
             </div>

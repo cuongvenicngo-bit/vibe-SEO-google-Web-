@@ -443,7 +443,7 @@ export const Step1WebsiteInput: React.FC<Step1WebsiteInputProps> = ({
                       ? 'bg-emerald-100/70 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-300 border border-emerald-300/60 dark:border-emerald-800/60'
                       : isCurrent
                       ? 'bg-white dark:bg-slate-800 text-brand-600 dark:text-brand-400 shadow-xs border border-brand-300 dark:border-brand-700 font-semibold'
-                      : 'bg-slate-100/60 dark:bg-slate-850/60 text-slate-400 dark:text-slate-500'
+                      : 'bg-slate-100/60 dark:bg-slate-850/60 text-slate-400 dark:text-slate-400'
                   }`}
                 >
                   <span

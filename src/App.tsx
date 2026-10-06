@@ -496,14 +496,14 @@ export default function App() {
         <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
           {/* Key numbers, overlapping the hero band */}
           {!report && !isLoading && (
-            <section className="-mt-20 sm:-mt-24 mb-10 relative z-10 surface-card rounded-2xl p-4 sm:p-6 grid grid-cols-2 sm:grid-cols-4 gap-4 sm:divide-x divide-slate-100 dark:divide-slate-800">
+            <section className="-mt-20 sm:-mt-24 mb-10 relative z-10 surface-card rounded-2xl p-4 sm:p-6 grid grid-cols-2 lg:grid-cols-4 gap-4 lg:divide-x divide-slate-200 dark:divide-slate-700">
               {[
                 { icon: Layers, value: '8 bước', label: 'Quy trình phân tích trọn vẹn' },
                 { icon: CheckCircle2, value: '35 tiêu chí', label: 'Nội dung, tin cậy, chuyển đổi' },
                 { icon: TrendingUp, value: '5 đối thủ', label: 'Tìm từ kết quả Google thật' },
                 { icon: Rocket, value: '90 ngày', label: 'Lộ trình hành động cụ thể' },
               ].map(({ icon: Icon, value, label }) => (
-                <div key={value} className="flex items-center gap-3 sm:justify-center sm:px-2">
+                <div key={value} className="flex items-center gap-3 lg:justify-center lg:px-2">
                   <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 dark:bg-brand-950/60 dark:text-brand-300 flex items-center justify-center shrink-0">
                     <Icon className="w-5 h-5" />
                   </div>

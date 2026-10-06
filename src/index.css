@@ -41,9 +41,18 @@
   /* Tailwind has no 150/650/750/850 steps but the components use them; without these the
      classes fall back to the text color (e.g. near-black table row dividers). */
   --color-slate-150: #e8edf5;
+  /* Secondary text: a touch darker than Tailwind's slate-500 to stay AA on the blue backgrounds. */
+  --color-slate-500: #5a6a82;
   --color-slate-650: #3e4c63;
-  --color-slate-750: #283548;
-  --color-slate-850: #172033;
+
+  /* Dark end of slate lifted toward navy: dark mode reads deep blue rather than near-black,
+     and light-mode headings (slate-900) pick up a subtle brand tint. */
+  --color-slate-700: #33456a;
+  --color-slate-750: #2a3a5c;
+  --color-slate-800: #22304f;
+  --color-slate-850: #1c2945;
+  --color-slate-900: #172340;
+  --color-slate-950: #0e1830;
 
   --animate-enter: enter 0.28s cubic-bezier(0.2, 0.8, 0.2, 1) both;
   --animate-float: float 7s ease-in-out infinite;
@@ -51,35 +60,43 @@
 
 :root {
   color-scheme: light;
-  /* Layering, back to front: page -> card -> step body -> inner cards (white). */
-  --app-bg: #edf1f8;
-  --app-glow: rgba(37, 99, 235, 0.1);
-  --card-bg: #ffffff;
-  --card-border: #dbe3ef;
-  --card-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 10px 30px -14px rgba(30, 64, 175, 0.18);
-  --step-body-bg: #f6f8fc;
-  --card-locked-bg: #f9fbfe;
-  --step-header-from: #eaf1ff;
-  --step-header-border: #e1e8f5;
-  --table-head-bg: #eaf1ff;
+  /* "Ice blue" light theme. Layering, back to front:
+     page (blue gradient + faint grid) -> card (blue-white) -> step body -> inner cards (white). */
+  --app-bg: #e6edf9;
+  --app-bg-top: #d9e5f8;
+  --app-glow: rgba(37, 99, 235, 0.14);
+  --app-grid: rgba(37, 99, 235, 0.05);
+  --card-bg: #fbfcff;
+  --card-border: #cfdcf1;
+  --card-shadow: 0 1px 2px rgba(30, 64, 175, 0.06), 0 14px 34px -18px rgba(30, 64, 175, 0.28);
+  --step-body-bg: #f0f5fd;
+  --card-locked-bg: #f5f8fe;
+  --step-header-from: #dce8fe;
+  --step-header-border: #d8e4f6;
+  --table-head-bg: #e1ebfd;
   --table-head-text: #1e3a8a;
+  --header-bg: rgba(241, 246, 254, 0.88);
   --focus-ring: rgba(37, 99, 235, 0.4);
 }
 
 .dark {
   color-scheme: dark;
-  --app-bg: #070c18;
-  --app-glow: rgba(37, 99, 235, 0.16);
-  --card-bg: #0f172a;
-  --card-border: #1e293b;
-  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -16px rgba(0, 0, 0, 0.7);
-  /* Darker than the card so inner cards (slate-850) stand forward. */
-  --step-body-bg: #0b1222;
-  --card-locked-bg: #0c1426;
-  --step-header-from: rgba(37, 99, 235, 0.18);
-  --step-header-border: #1e293b;
-  --table-head-bg: #15213b;
+  /* Navy dark theme: deep blue surfaces instead of near-black. */
+  --app-bg: #0e1830;
+  --app-bg-top: #12224a;
+  --app-glow: rgba(59, 130, 246, 0.2);
+  --app-grid: rgba(148, 163, 184, 0.05);
+  --card-bg: #15203a;
+  --card-border: #26365a;
+  --card-shadow: 0 1px 2px rgba(2, 6, 23, 0.35), 0 14px 34px -18px rgba(2, 6, 23, 0.6);
+  /* Slightly darker than the card so inner cards (slate-800/850) stand forward. */
+  --step-body-bg: #111c34;
+  --card-locked-bg: #132039;
+  --step-header-from: rgba(59, 130, 246, 0.2);
+  --step-header-border: #26365a;
+  --table-head-bg: #1e2d4f;
   --table-head-text: #bfdbfe;
+  --header-bg: rgba(14, 24, 48, 0.85);
   --focus-ring: rgba(96, 165, 250, 0.5);
 }
 
@@ -94,8 +111,13 @@
     min-height: 100vh;
     margin: 0;
     background-color: var(--app-bg);
-    background-image: radial-gradient(80rem 36rem at 50% -8rem, var(--app-glow), transparent 70%);
-    background-repeat: no-repeat;
+    background-image:
+      radial-gradient(80rem 36rem at 50% -8rem, var(--app-glow), transparent 70%),
+      linear-gradient(180deg, var(--app-bg-top) 0, var(--app-bg) 48rem),
+      linear-gradient(var(--app-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--app-grid) 1px, transparent 1px);
+    background-size: 100% 100%, 100% 100%, 48px 48px, 48px 48px;
+    background-repeat: no-repeat, no-repeat, repeat, repeat;
     font-family: var(--font-sans);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -180,12 +202,8 @@
 }
 
 .app-header {
-  background: rgba(255, 255, 255, 0.88);
+  background: var(--header-bg);
   border-color: var(--card-border);
-}
-
-.dark .app-header {
-  background: rgba(7, 12, 24, 0.82);
 }
 
 /* Hero: the one deep-blue band on the page (part of the 30% brand share) with a faint grid. */
